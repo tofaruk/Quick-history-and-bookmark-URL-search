@@ -1,12 +1,12 @@
-#historyDiv {
+.historyDiv, .bookmarkDiv {
     width: 700px;
 }
 
-#website {
+.website {
     width: 200px;
 }
 
-#searchForm input {
+.searchForm input {
     vertical-align: middle;
     margin: 5px 5px 10px 0;
     padding: 10px;
@@ -17,11 +17,7 @@
     font-size: 15px;
 }
 
-#searchForm select {
-    /*            margin: 5px 10px 5px 0;
-                padding: 10px;
-                background-color: #fff;
-                border: 1px solid #ddd;*/
+.searchForm select {
     margin: 5px 5px 5px 0;
     padding: 5px 35px 5px 5px;
     font-size: 16px;
@@ -30,27 +26,27 @@
     background-color: #fff;
 }
 
-#historyTable {
+.historyTable {
     font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
 }
 
-#historyTable td, #historyTable.table th {
+.historyTable td, #historyTable.table th {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
 }
 
-#historyTable tr:nth-child(even) {
+.historyTable tr:nth-child(even) {
     background-color: #dddddd;
 }
 
-#historyTable #loading, #noData {
+.historyTable #loading, #noData {
     display: none;
 }
 
-#noData p {
+.noData p {
     text-align: center;
     color: red;
 }
@@ -118,7 +114,7 @@
 }
 
 .onoffswitch-inner:after {
-    content: " Bookmarks";
+    content: "Bookmarks";
     padding-right: 13px;
     background-color: #EEEEEE;
     color: #999999;

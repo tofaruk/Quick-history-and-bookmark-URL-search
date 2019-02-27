@@ -4,11 +4,14 @@ var kMillisecondsPerDay = 1000 * 60 * 60 * 24;
 var kMillisecondsPerWeek = kMillisecondsPerDay * 7;
 var kOneWeekAgo = (new Date).getTime() - kMillisecondsPerWeek;
 
+var bookmarks = [];
+var folders = [];
 document.addEventListener("DOMContentLoaded", function (event) {
     searchHistory('', ((new Date).getTime() - kMillisecondsPerDay), (new Date).getTime(), 50);
 
     setTimeout(function () {
         buildNavigationOptions();
+        getBookTree();
     }, 1000);
 
 });
@@ -17,13 +20,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
 var searchHistory = function (searchTerm, startTime, endTime, limit) {
     var loading = $("#loading");
     loading.show();
-    console.log({
+    /*console.log({
         searchTerm: searchTerm,
         startTime: getVisitTimeTemp(startTime),
         endTime: getVisitTimeTemp(endTime),
         limit: limit
-    });
-    // alert(searchTerm);
+    });*/
+
     chrome.history.search({
         text: searchTerm,
         startTime: startTime,
@@ -38,10 +41,10 @@ var constructHistory = function (historyItems) {
     var loading = $("#loading");
     var noData = $("#noData");
     $("#historyTable .item").remove();
-    console.log(historyItems);
-    if(historyItems.length > 0){
+
+    if (historyItems.length > 0) {
         noData.hide();
-    }else{
+    } else {
         noData.show();
     }
     historyItems.forEach(function (item) {
@@ -122,6 +125,7 @@ var getVisitTimeTemp = function (time) {
     return time.toLocaleDateString("en-US", options) + '/ ' + time.toLocaleTimeString("en-US", options);
 
 }
+
 function getStartAndEndTimeFromFilterOption() {
     var timeFilterSelect = $("#time_filter");
 
@@ -159,15 +163,53 @@ $(document).ready(function (e) {
         event.preventDefault();
         return false;
     });
+
+    $('#onoffswitch').change(function () {
+        if($(this).is(":checked")) {
+            $("#historyContainer").show();
+            $("#bookmarkContainer").hide();
+
+        }else{
+            $("#bookmarkContainer").show();
+            $("#historyContainer").hide();
+        }
+    });
 });
 
+var traverse = function (item) {
+    for (i in item) {
+        if (!!item[i] && typeof(item[i]) == "object") {
+            if (item[i].hasOwnProperty('url')) {
+                bookmarks.push({parentId: item[i].parentId, title: item[i].title, url: item[i].url});
+            } else {
+                folders[item[i].id] = {id: item[i].id, title: item[i].title, path: folders[item[i].parentId]};
+            }
+            traverse(item[i]);
+        }
+    }
+}
 
-/**
- chrome.bookmarks.getTree(function(data){
-console.log(data);
-});
+var getBookTree = function () {
+    if (bookmarks.length == 0) {
+        chrome.bookmarks.getTree(function (data) {
+            console.log(data);
+            traverse(data);
+        });
+    }
 
- chrome.bookmarks.search('tutorial', function(data){
-console.log(data);
-});
- */
+
+    var trOriginal =  $("#bookmarkTable .core_item");
+    var bookmarkTable = $("#bookmarkTable");
+    console.log(bookmarks.length);
+
+    bookmarks.forEach(function (item) {
+
+        var tr = trOriginal.parent().clone();
+        tr.setAttribute('class', 'item');
+        tr.find("td p.item_info span").text(item.title);
+        bookmarkTable.append(tr);
+    });
+
+    console.log(folders);
+
+}

@@ -9,7 +9,7 @@
   "browser_action": {
     "default_icon": "assets/searchHistory.png",
     "default_popup": "index.html",
-    "default_title": "Easy Search history and bookmark URL!!"
+    "default_title": "Easy search history and bookmark URL!!"
   },
   "manifest_version": 2,
   "permissions": [
