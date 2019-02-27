@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="assets/jquery-3.3.1.js"></script>
+    <script src="assets/script.js"></script>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<div>
+    <div>
+        <h2>Search History and Bookmark URL</h2>
+    </div>
+    <div class="onoffswitch">
+        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+        <label class="onoffswitch-label" for="myonoffswitch">
+            <span class="onoffswitch-inner"></span>
+            <span class="onoffswitch-switch"></span>
+        </label>
+    </div>
+</div>
+<div id="historyNavigation">
+    <form id="searchForm" method="post">
+        <input type="text" id="searchTerm" name="searchTerm" placeholder="Search your history">
+        <select id="website" style="width: 200px;">
+            <option value="">All website</option>
+        </select>
+        <select id="time_filter" style="width: 200px;">
+            <optgroup label="Current week">
+                <option selected value="0-d">Today</option>
+                <option value="1-d">Yesterday</option>
+                <option value="2-d">2 days ago</option>
+                <option value="3-d">3 days ago</option>
+                <option value="4-d">4 days ago</option>
+                <option value="5-d">5 days ago</option>
+                <option value="6-d">6 days ago</option>
+            </optgroup>
+
+            <option value="1-w">1 week ago</option>
+            <option value="2-w">2 weeks ago</option>
+            <option value="3-w">3 weeks ago</option>
+            <option value="4-w">4 weeks ago</option>
+            <option value="5-w">5 weeks ago</option>
+            <option value="6-w">6 weeks ago</option>
+            <option value="7-w">7 weeks ago</option>
+            <option value="8-w">8 weeks ago</option>
+        </select>
+        <select id="limit" style="width: 70px;">
+            <option>Select Number of item</option>
+            <option value="20">20</option>
+            <option selected value="50">50</option>
+            <option value="100">100</option>
+            <option value="200">200</option>
+            <option value="300">300</option>
+        </select>
+    </form>
+</div>
+<div id="historyDiv">
+    <table id="historyTable">
+        <tr id="loading" class="">
+            <td><p><img align="center" height="50" alt="loading ...."
+                        src="assets/straight-loader.gif"/>
+            </p></td>
+        </tr>
+        <tr id="noData" class="">
+            <td><p>No data found</p></td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>

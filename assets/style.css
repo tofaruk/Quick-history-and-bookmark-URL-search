@@ -1,0 +1,150 @@
+#historyDiv {
+    width: 700px;
+}
+
+#website {
+    width: 200px;
+}
+
+#searchForm input {
+    vertical-align: middle;
+    margin: 5px 5px 10px 0;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    height: 12px;
+    font-size: 15px;
+}
+
+#searchForm select {
+    /*            margin: 5px 10px 5px 0;
+                padding: 10px;
+                background-color: #fff;
+                border: 1px solid #ddd;*/
+    margin: 5px 5px 5px 0;
+    padding: 5px 35px 5px 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    height: 34px;
+    background-color: #fff;
+}
+
+#historyTable {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#historyTable td, #historyTable.table th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+#historyTable tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+#historyTable #loading, #noData {
+    display: none;
+}
+
+#noData p {
+    text-align: center;
+    color: red;
+}
+
+.item .item_info {
+    font-weight: bold;
+    color: #005cbf;
+}
+
+.item .item_info img {
+    margin-right: 10px;
+}
+
+.item_url a {
+    text-decoration-line: none;
+}
+
+/**switch option*/
+.onoffswitch {
+    position: relative;
+    width: 133px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.onoffswitch-checkbox {
+    display: none;
+}
+
+.onoffswitch-label {
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid #999999;
+    border-radius: 19px;
+}
+
+.onoffswitch-inner {
+    display: block;
+    width: 200%;
+    margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+}
+
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block;
+    float: left;
+    width: 50%;
+    height: 32px;
+    padding: 0;
+    line-height: 32px;
+    font-size: 15px;
+    color: white;
+    font-family: Trebuchet, Arial, sans-serif;
+    font-weight: bold;
+    box-sizing: border-box;
+}
+
+.onoffswitch-inner:before {
+    content: "Histories";
+    padding-left: 13px;
+    background-color: #34A7C1;
+    color: #FFFFFF;
+}
+
+.onoffswitch-inner:after {
+    content: " Bookmarks";
+    padding-right: 13px;
+    background-color: #EEEEEE;
+    color: #999999;
+    text-align: right;
+}
+
+.onoffswitch-switch {
+    display: block;
+    width: 27px;
+    margin: 2.5px;
+    background: #FFFFFF;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 97px;
+    border: 2px solid #999999;
+    border-radius: 19px;
+    transition: all 0.3s ease-in 0s;
+}
+
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px;
+}
+
+/**end switch option*/
