@@ -165,13 +165,15 @@ $(document).ready(function (e) {
     });
 
     $('#onoffswitch').change(function () {
-        if($(this).is(":checked")) {
+        if ($(this).is(":checked")) {
             $("#historyContainer").show();
             $("#bookmarkContainer").hide();
 
-        }else{
+        } else {
+            constructBookmarkTable();
             $("#bookmarkContainer").show();
             $("#historyContainer").hide();
+
         }
     });
 });
@@ -189,6 +191,18 @@ var traverse = function (item) {
     }
 }
 
+var getFolders = function (paths, arr) {
+
+    if (paths.id != 0) {
+        getFolders(paths.path, arr);
+    }
+    if (paths.id != 0) {
+        arr.push(paths.title);
+    }
+
+    return arr;
+}
+
 var getBookTree = function () {
     if (bookmarks.length == 0) {
         chrome.bookmarks.getTree(function (data) {
@@ -197,19 +211,29 @@ var getBookTree = function () {
         });
     }
 
-
-    var trOriginal =  $("#bookmarkTable .core_item");
+}
+var constructBookmarkTable = function () {
     var bookmarkTable = $("#bookmarkTable");
-    console.log(bookmarks.length);
+    var trOriginal = $("#bookmarkTable .core_item");
+    if (bookmarkTable.find(".item").length > 0) {
+        return;
+    }
+    console.log(bookmarks);
 
     bookmarks.forEach(function (item) {
-
-        var tr = trOriginal.parent().clone();
-        tr.setAttribute('class', 'item');
+        var tr = trOriginal.clone();
+        tr.removeClass('core_item').addClass('item');
         tr.find("td p.item_info span").text(item.title);
+        tr.find("td p.item_info img").attr('src', 'chrome://favicon/' + item.url);
+        var folderArr = getFolders(folders[item.parentId],[]);
+        tr.find("td p.time span").text("Folder: "+folderArr.join(' > '));
+        tr.find("td p.item_url a").attr('href', item.url).text(item.url);
         bookmarkTable.append(tr);
     });
-
-    console.log(folders);
+    bookmarkTable.dataTable({
+        "ordering": false,
+        "info": false,
+        "dom": '<"tools_wrapper"<"left_tools"fl><"right_tools"p>>'
+    });
 
 }

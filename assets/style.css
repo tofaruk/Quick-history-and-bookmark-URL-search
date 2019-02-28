@@ -32,20 +32,50 @@
     width: 100%;
 }
 
-.historyTable td, #historyTable.table th {
+ td, th {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
 }
 
-.historyTable tr:nth-child(even) {
+tr:nth-child(even) {
     background-color: #dddddd;
 }
 
 .historyTable #loading, #noData {
     display: none;
 }
+.bookmarkTable{
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+.tools_wrapper .left_tools{
+    float: left;
+    width: 40%;
+}
+.tools_wrapper .right_tools{
+     float: right;
+     width: 60%;
+ }
 
+.tools_wrapper .left_tools input{
+    vertical-align: middle;
+    margin: 5px 5px 10px 0;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    height: 12px;
+    font-size: 15px;
+}
+
+.bookmarkTable .core_item{
+    display: none;
+}
+.bookmarkTable th{
+    display: none;
+}
 .noData p {
     text-align: center;
     color: red;

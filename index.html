@@ -2,7 +2,9 @@
 <html>
 <head>
     <script src="assets/jquery-3.3.1.js"></script>
+    <script src="assets/jquery.dataTables.min.js"></script>
     <script src="assets/script.js"></script>
+    <link rel="stylesheet" href="assets/jquery.dataTables.min.css">
     <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -58,7 +60,7 @@
     </div>
     <div id="historyDiv" class="historyDiv">
         <table id="historyTable" class="historyTable">
-            <tr id="loading" class="">
+            <tr id="loading" class="loading">
                 <td><p><img align="center" height="50" alt="loading ...."
                             src="assets/straight-loader.gif"/>
                 </p></td>
@@ -71,7 +73,14 @@
 </div>
 <div id="bookmarkContainer" style="display: none;">
     <div id="bookmarkDiv" class="bookmarkDiv">
-        <table id="bookmarkTable" class="bookmarkTable">
+
+        <table id="bookmarkTable" class="bookmarkTable display compact" style="width: 100%;" >
+            <thead>
+            <th>
+                Bookmarks
+            </th>
+            </thead>
+            <tbody>
             <tr class="core_item">
                 <td>
                     <p class="item_info"><img src="chrome://favicon/https://mail.google.com/mail/u/0/#inbox"><span>Inbox - tofarukomar@gmail.com - Gmail</span>
@@ -81,6 +90,7 @@
                     </p>
                 </td>
             </tr>
+            </tbody>
         </table>
     </div>
 </div>
