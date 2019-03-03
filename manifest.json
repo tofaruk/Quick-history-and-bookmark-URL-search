@@ -1,7 +1,7 @@
 {
   "name": "Quick history and bookmark URL search",
   "version": "1.0",
-  "description": "Quick search history and bookmark url. Filter history by website , time and  custom search term. Filter bookmark by folder name , url and url-title",
+  "description": "Quick search from your browser history and bookmark URL. Easily search with filter option.",
   "background": {
     "scripts": ["assets/background.js"],
     "persistent": false
