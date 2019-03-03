@@ -1,11 +1,11 @@
 //https://chromium.googlesource.com/chromium/src/+/master/chrome/common/extensions/docs/examples/api/history/historyOverride
-
-var kMillisecondsPerDay = 1000 * 60 * 60 * 24;
-var kMillisecondsPerWeek = kMillisecondsPerDay * 7;
-var kOneWeekAgo = (new Date).getTime() - kMillisecondsPerWeek;
+const kMillisecondsPerDay = 1000 * 60 * 60 * 24;
+const kMillisecondsPerWeek = kMillisecondsPerDay * 7;
+const kOneWeekAgo = (new Date).getTime() - kMillisecondsPerWeek;
 
 var bookmarks = [];
 var folders = [];
+
 document.addEventListener("DOMContentLoaded", function (event) {
     searchHistory('', ((new Date).getTime() - kMillisecondsPerDay), (new Date).getTime(), 50);
 
@@ -20,13 +20,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 var searchHistory = function (searchTerm, startTime, endTime, limit) {
     var loading = $("#loading");
     loading.show();
-    /*console.log({
-        searchTerm: searchTerm,
-        startTime: getVisitTimeTemp(startTime),
-        endTime: getVisitTimeTemp(endTime),
-        limit: limit
-    });*/
-
     chrome.history.search({
         text: searchTerm,
         startTime: startTime,
@@ -88,6 +81,7 @@ var buildNavigationOptions = function () {
         maxResults: 1000
     }, constructNavigationOptions);
 }
+
 var constructNavigationOptions = function (historyItems) {
     var searchForm = $("#searchForm");
     var websiteSelect = $("#website");
@@ -111,20 +105,13 @@ function onlyUnique(value, index, self) {
 }
 
 var getVisitTime = function (item) {
-    var options = {weekday: 'short', day: '2-digit', month: 'long', hour: '2-digit', minute: 'numeric'};
+    var options = {weekday: 'long', day: '2-digit', month: 'long', hour: '2-digit', minute: 'numeric'};
     var time = new Date(item.lastVisitTime);
 
     return time.toLocaleTimeString("en-US", options);
 
 }
 
-var getVisitTimeTemp = function (time) {
-    var options = {weekday: 'short', day: '2-digit', month: 'long', hour: '2-digit', minute: 'numeric'};
-    var time = new Date(time);
-
-    return time.toLocaleDateString("en-US", options) + '/ ' + time.toLocaleTimeString("en-US", options);
-
-}
 
 function getStartAndEndTimeFromFilterOption() {
     var timeFilterSelect = $("#time_filter");
@@ -145,38 +132,6 @@ function getStartAndEndTimeFromFilterOption() {
     return {endTime: endTime, startTime: startTime};
 }
 
-$(document).ready(function (e) {
-    $("#searchForm").on("submit", function (event) {
-        event.preventDefault()
-    })
-
-    $("#searchForm").change(function (event) {
-        var searchTermInput = $("#searchTerm");
-        var websiteSelect = $("#website");
-        var limitSelect = $("#limit");
-
-        var startAndEndTime = getStartAndEndTimeFromFilterOption();
-
-        var text = String(searchTermInput.val() + ' ' + websiteSelect.val());
-        searchHistory($.trim(text), startAndEndTime.startTime, startAndEndTime.endTime, parseInt(limitSelect.val()));
-
-        event.preventDefault();
-        return false;
-    });
-
-    $('#onoffswitch').change(function () {
-        if ($(this).is(":checked")) {
-            $("#historyContainer").show();
-            $("#bookmarkContainer").hide();
-
-        } else {
-            constructBookmarkTable();
-            $("#bookmarkContainer").show();
-            $("#historyContainer").hide();
-
-        }
-    });
-});
 
 var traverse = function (item) {
     for (i in item) {
@@ -206,34 +161,94 @@ var getFolders = function (paths, arr) {
 var getBookTree = function () {
     if (bookmarks.length == 0) {
         chrome.bookmarks.getTree(function (data) {
-            console.log(data);
             traverse(data);
         });
     }
 
 }
 var constructBookmarkTable = function () {
+
     var bookmarkTable = $("#bookmarkTable");
     var trOriginal = $("#bookmarkTable .core_item");
     if (bookmarkTable.find(".item").length > 0) {
         return;
     }
-    console.log(bookmarks);
 
     bookmarks.forEach(function (item) {
         var tr = trOriginal.clone();
         tr.removeClass('core_item').addClass('item');
         tr.find("td p.item_info span").text(item.title);
         tr.find("td p.item_info img").attr('src', 'chrome://favicon/' + item.url);
-        var folderArr = getFolders(folders[item.parentId],[]);
-        tr.find("td p.time span").text("Folder: "+folderArr.join(' > '));
+        var folderArr = getFolders(folders[item.parentId], []);
+        tr.find("td p.time span").text("Folder: " + folderArr.join(' > '));
         tr.find("td p.item_url a").attr('href', item.url).text(item.url);
         bookmarkTable.append(tr);
     });
+
     bookmarkTable.dataTable({
         "ordering": false,
         "info": false,
-        "dom": '<"tools_wrapper"<"left_tools"fl><"right_tools"p>>'
+        "pageLength": 50,
+        "lengthMenu": [ 10, 25, 50, 100, 500, 1000],
+        "pagingType": "simple",
+        "dom": '<"tools_wrapper"<"left_tools"f><"mid_tools"p><"right_tools"l>>',
+        "language": {
+            search: '',
+            searchPlaceholder: 'Search your bookmark',
+            zeroRecords: 'No bookmark found',
+            lengthMenu: '_MENU_',
+
+        }
     });
 
 }
+
+
+$(document).ready(function (e) {
+    $("#searchTerm").keyup(function(){
+       var searchTerm = $(this).val();
+       if(searchTerm.length == 0 || searchTerm.length > 2){
+           $("#searchForm").trigger('change');
+       }
+    });
+
+    $("#searchForm").on("submit", function (event) {
+        event.preventDefault()
+    })
+
+    $("#searchForm").change(function (event) {
+        var searchTermInput = $("#searchTerm");
+        var websiteSelect = $("#website");
+        var limitSelect = $("#limit");
+
+        var startAndEndTime = getStartAndEndTimeFromFilterOption();
+
+        var text = String(searchTermInput.val() + ' ' + websiteSelect.val());
+        searchHistory($.trim(text), startAndEndTime.startTime, startAndEndTime.endTime, parseInt(limitSelect.val()));
+
+        event.preventDefault();
+        return false;
+    });
+
+    $('#onoffswitch').change(function () {
+        if ($(this).is(":checked")) {
+            $("#historyContainer").show();
+            $("#bookmarkContainer").hide();
+
+        } else {
+
+            $("#bookmarkContainer").show();
+            $("#historyContainer").hide();
+
+        }
+    });
+
+    $(".tab .tablinks").click(function () {
+        $('.tab .tablinks').not(this).removeClass('active');
+        $(this).toggleClass('active');
+        $(".tabcontent").hide();
+        $("#" + $(this).attr('data-name')).show();
+        constructBookmarkTable();
+
+    });
+});

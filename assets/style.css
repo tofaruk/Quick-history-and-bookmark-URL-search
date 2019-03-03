@@ -32,7 +32,7 @@
     width: 100%;
 }
 
- td, th {
+td, th {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
@@ -45,37 +45,40 @@ tr:nth-child(even) {
 .historyTable #loading, #noData {
     display: none;
 }
-.bookmarkTable{
+
+.bookmarkTable {
     font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
 }
-.tools_wrapper .left_tools{
+
+.tools_wrapper .left_tools {
     float: left;
-    width: 40%;
+    width: 32%;
 }
-.tools_wrapper .right_tools{
-     float: right;
-     width: 60%;
- }
 
-.tools_wrapper .left_tools input{
-    vertical-align: middle;
-    margin: 5px 5px 10px 0;
-    padding: 10px;
-    background-color: #fff;
-    border: 1px solid #ddd;
+.tools_wrapper .mid_tools {
+    width: 25%;
+    float: left;
+    margin-right: 12px;
+    border: 1px solid #ccc;
+    height: 32px;
     border-radius: 4px;
-    height: 12px;
-    font-size: 15px;
 }
 
-.bookmarkTable .core_item{
+.tools_wrapper .right_tools {
+    float: left;
+    width: 9%;
+}
+
+.bookmarkTable .core_item {
     display: none;
 }
-.bookmarkTable th{
+
+.bookmarkTable th {
     display: none;
 }
+
 .noData p {
     text-align: center;
     color: red;
@@ -94,83 +97,91 @@ tr:nth-child(even) {
     text-decoration-line: none;
 }
 
-/**switch option*/
-.onoffswitch {
-    position: relative;
-    width: 133px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-}
-
-.onoffswitch-checkbox {
-    display: none;
-}
-
-.onoffswitch-label {
-    display: block;
-    overflow: hidden;
-    cursor: pointer;
-    border: 2px solid #999999;
-    border-radius: 19px;
-}
-
-.onoffswitch-inner {
-    display: block;
-    width: 200%;
-    margin-left: -100%;
-    transition: margin 0.3s ease-in 0s;
-}
-
-.onoffswitch-inner:before, .onoffswitch-inner:after {
-    display: block;
+.dataTables_wrapper .dataTables_filter {
     float: left;
-    width: 50%;
-    height: 32px;
-    padding: 0;
-    line-height: 32px;
-    font-size: 15px;
-    color: white;
-    font-family: Trebuchet, Arial, sans-serif;
-    font-weight: bold;
-    box-sizing: border-box;
 }
 
-.onoffswitch-inner:before {
-    content: "Histories";
-    padding-left: 13px;
-    background-color: #34A7C1;
-    color: #FFFFFF;
+.dataTables_wrapper .dataTables_length {
+    float: right;
 }
 
-.onoffswitch-inner:after {
-    content: "Bookmarks";
-    padding-right: 13px;
-    background-color: #EEEEEE;
-    color: #999999;
-    text-align: right;
+.dataTables_wrapper {
+    padding: 5px 0 10px;
 }
 
-.onoffswitch-switch {
-    display: block;
-    width: 27px;
-    margin: 2.5px;
-    background: #FFFFFF;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 97px;
-    border: 2px solid #999999;
-    border-radius: 19px;
-    transition: all 0.3s ease-in 0s;
-}
-
-.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+.dataTables_wrapper .dataTables_filter input {
+    background-color: #fff;
+    height: 34px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
     margin-left: 0;
+    margin-right: 5px;
+    width: 215px;
+    font-size: 15px;
 }
 
-.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
-    right: 0px;
+.dataTables_paginate.paging_simple {
+    padding: 0;
+    margin: 0;
+    font-size: 15px;
 }
 
-/**end switch option*/
+.dataTables_wrapper .dataTables_length select {
+    background-color: #fff;
+    height: 34px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    padding: 5px 5px 5px 0;
+    margin-left: 5px;
+}
+
+table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
+    background-color: #dddddd;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    border-radius: 4px;
+    padding: 6px 19px;
+    margin-left: 1px;
+    margin-right: 1px;
+}
+.dataTables_wrapper .dataTables_paginate.paging_simple .paginate_button.disabled{
+    color: #ccc!important;
+}
+/* Style the tab */
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}

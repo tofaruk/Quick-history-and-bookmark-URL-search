@@ -1,27 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="assets/jquery-3.3.1.js"></script>
-    <script src="assets/jquery.dataTables.min.js"></script>
-    <script src="assets/script.js"></script>
+    <title>Quick history and bookmark URL search</title>
     <link rel="stylesheet" href="assets/jquery.dataTables.min.css">
     <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 
-<div>
-    <div>
-        <h2>Search History and Bookmark URL</h2>
-    </div>
-    <div class="onoffswitch">
-        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="onoffswitch" checked>
-        <label class="onoffswitch-label" for="onoffswitch">
-            <span class="onoffswitch-inner"></span>
-            <span class="onoffswitch-switch"></span>
-        </label>
-    </div>
+
+<div class="tab">
+    <button class="tablinks active" data-name="historyContainer">History</button>
+    <button class="tablinks" data-name="bookmarkContainer">Bookmark</button>
 </div>
-<div id="historyContainer" style="">
+
+<div id="historyContainer" class="tabcontent" style="display: block;">
     <div id="historyNavigation" class="historyNavigation">
         <form id="searchForm" class="searchForm" method="post">
             <input type="text" id="searchTerm" name="searchTerm" placeholder="Search your history">
@@ -71,10 +63,10 @@
         </table>
     </div>
 </div>
-<div id="bookmarkContainer" style="display: none;">
+<div id="bookmarkContainer" class="tabcontent" style="display: none;">
     <div id="bookmarkDiv" class="bookmarkDiv">
 
-        <table id="bookmarkTable" class="bookmarkTable display compact" style="width: 100%;" >
+        <table id="bookmarkTable" class="bookmarkTable display compact" style="width: 100%;">
             <thead>
             <th>
                 Bookmarks
@@ -83,10 +75,10 @@
             <tbody>
             <tr class="core_item">
                 <td>
-                    <p class="item_info"><img src="chrome://favicon/https://mail.google.com/mail/u/0/#inbox"><span>Inbox - tofarukomar@gmail.com - Gmail</span>
+                    <p class="item_info"><img align="fav" src=""><span></span>
                     </p>
-                    <p class="time"><span>Mon, February 25, 11:01 PM</span></p>
-                    <p class="item_url"><a target="_blank" href="https://mail.google.com/mail/u/0/#inbox">https://mail.google.com/mail/u/0/#inbox</a>
+                    <p class="path"><span></span></p>
+                    <p class="item_url"><a target="_blank" href="#"></a>
                     </p>
                 </td>
             </tr>
@@ -94,6 +86,8 @@
         </table>
     </div>
 </div>
-
+<script src="assets/jquery-3.3.1.js"></script>
+<script src="assets/jquery.dataTables.min.js"></script>
+<script src="assets/script.js"></script>
 </body>
 </html>
