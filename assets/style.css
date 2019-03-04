@@ -14,24 +14,33 @@
     padding-right: 0;
     border: 1px solid #ccc;
 }
-.item_table input[type="checkbox"]{
+
+.item_table input[type="checkbox"] {
     margin: 0 9px;
 }
+
 .item_table td.select {
     width: 5%;
 }
 
+.item_table th {
+    height: 32px;
+    width: 30px;
+}
+
 .item_table td.info {
-    width: 95%;
     padding: 8px;
     text-align: left;
 }
-.item_table thead tr:nth-child(odd){
+
+.item_table thead tr:nth-child(odd) {
     background-color: #f2f2f2;
 }
-.item_table tr:nth-child(even){
+
+.item_table tr:nth-child(even) {
     background-color: #f2f2f2;
 }
+
 .icon {
     margin-right: 3px;
     margin-bottom: -4px;
@@ -41,9 +50,11 @@
 .icon.favicon {
     margin-bottom: -2px;
 }
+
 .icon.time {
     content: url("./icons/time.png");
 }
+
 .icon.folder {
     margin-bottom: -2px;
     content: url("./icons/folder.png");
@@ -53,20 +64,29 @@
     content: url("./icons/right-arrow.png");
 }
 
+p.info_url {
+    display: none;
+}
+
 .icon.url {
     content: url("./icons/external.svg");
 }
-.item_table a.title{
+
+.item_table a.title {
     color: #1a0dab;
     font-size: 17px;
     font-weight: 400;
 }
+
 .item_table a.full_url {
     color: #006621;
+    word-break: break-word;
 }
-.item_table a{
+
+.item_table a {
     text-decoration: none;
 }
+
 .item_table a:hover {
     text-decoration: underline;
 }
@@ -104,6 +124,7 @@
 
 .tools_wrapper .left_tools {
     float: left;
+    width: 417px;
 }
 
 .tools_wrapper .mid_tools {
@@ -144,6 +165,14 @@
     width: 210px;
 }
 
+.filterByWebsite input#bookmarkWebsite {
+    padding: 7px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 15px;
+    margin: 0px 1px;
+}
+
 .dataTables_paginate.paging_simple {
     padding: 0;
     margin: 7px 0;
@@ -165,13 +194,15 @@
     margin-right: 1px;
 }
 
-.dataTables_wrapper .dataTables_paginate .paginate_button:hover{
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
     background-color: #000;
     color: #ffffff;
 }
-.dataTables_wrapper .dataTables_paginate.paging_simple .paginate_button.disabled{
-    color: #ccc!important;
+
+.dataTables_wrapper .dataTables_paginate.paging_simple .paginate_button.disabled {
+    color: #ccc !important;
 }
+
 /*end data table */
 
 /* Style the tab */
@@ -209,4 +240,15 @@
     padding: 6px 12px;
     border: 1px solid #ccc;
     border-top: none;
+}
+
+/* others */
+button.remove {
+    float: left;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 2px;
+    margin-left: 5px;
+    background-color: #ccc;
 }

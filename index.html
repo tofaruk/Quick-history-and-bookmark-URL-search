@@ -18,7 +18,7 @@
             <form id="searchForm" class="searchForm" method="post">
                 <input type="text" id="searchTerm" name="searchTerm" placeholder="Search your history">
 
-                <input id="website" list="websiteData" placeholder="website">
+                <input id="website" list="websiteData" placeholder="Website">
                 <datalist id="websiteData">
                 </datalist>
                 <select id="time_filter" class="time_filter" style="width: 160px;">
@@ -55,14 +55,15 @@
             <thead>
             <tr>
                 <th class="select">
-                    <input type="checkbox" name="history" value="222">
+                    <input type="checkbox" id="allHistories" name="all_histories">
                 </th>
                 <th>
-
+                    <button id="removeHistory" class="remove">Remove History records</button>
                 </th>
             </tr>
             </thead>
             <tbody>
+
             </tbody>
         </table>
     </div>
@@ -71,36 +72,26 @@
             <thead>
             <tr>
                 <th class="select">
-                    <input type="checkbox" name="bookmark" value="222">
+                    <input type="checkbox" id="allBookmarks" name="all_bookmarks">
                 </th>
                 <th>
-
+                    <button id="removeBookmark" class="remove">Remove Bookmark records</button>
                 </th>
             </tr>
             </thead>
             <tbody>
+
             </tbody>
         </table>
     </div>
 </div>
 
 
-
-
 <table id="coreItemTable" style="display: none;">
-    <thead>
-    <tr>
-        <th class="select">
-            <input type="checkbox" name="history" value="222">
-        </th>
-        <th>
-
-        </th>
-    </tr>
-    </thead>
     <tbody>
+
     <tr class="item core_history_item">
-        <td class="select"><input type="checkbox" name="history" value="222"></td>
+        <td class="select"><input type="checkbox" name="history[]" value=""></td>
         <td class="info">
             <p class="info_title">
                 <span class="icon favicon" style=""></span>
@@ -118,7 +109,7 @@
         </td>
     </tr>
     <tr class="item core_bookmark_item">
-        <td class="select"><input type="checkbox" name="history" value="222"></td>
+        <td class="select"><input type="checkbox" name="bookmark[]" value=""></td>
         <td class="info">
             <p class="info_title">
                 <span class="icon favicon"></span>
@@ -138,7 +129,12 @@
     </tr>
     </tbody>
 </table>
-
+<div id="datatableFilters" style="display: none;">
+    <div class="filterByWebsite">
+        <input id="bookmarkWebsite" list="bookmarkWebsiteData" placeholder="Website">
+        <datalist id="bookmarkWebsiteData">
+    </div>
+</div>
 
 <script src="assets/jquery-3.3.1.js"></script>
 <script src="assets/jquery.dataTables.min.js"></script>

@@ -1,4 +1,3 @@
-//https://chromium.googlesource.com/chromium/src/+/master/chrome/common/extensions/docs/examples/api/history/historyOverride
 const kMillisecondsPerDay = 1000 * 60 * 60 * 24;
 const kMillisecondsPerWeek = kMillisecondsPerDay * 7;
 const kOneWeekAgo = (new Date).getTime() - kMillisecondsPerWeek;
@@ -18,9 +17,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
 var searchHistory = function (searchTerm, startTime, endTime, limit) {
-  //  var loading = $("#loading");
-  //  loading.show();
-    //console.log({searchTerm, startTime, endTime, limit});
     chrome.history.search({
         text: searchTerm,
         startTime: startTime,
@@ -33,28 +29,24 @@ var searchHistory = function (searchTerm, startTime, endTime, limit) {
 var constructHistory = function (historyItems) {
     var historyTable = $("#historyContainer .item_table");
     var trOriginal = $("#coreItemTable .core_history_item");
-    $("#historyContainer .item_table .item").remove();
+    historyTable.find(".item").remove();
 
-    /* var loading = $("#loading");
-     var noData = $("#noData");
-    if (historyItems.length > 0) {
-        noData.hide();
-    } else {
-        noData.show();
-    }
-
-*/
     historyItems.forEach(function (item) {
 
         var tr = trOriginal.clone();
+        tr.removeClass('core_history_item');
         tr.addClass('item');
-        tr.find("p.info_title a.title").text(item.title).attr('href', item.url);
-        tr.find("p.info_title span.favicon").css('content', 'url("chrome://favicon/'+item.url+'")');
+        tr.find("td.select input[name='history[]']").val(item.id);
+        tr.find("p.info_title a.title")
+            .text(item.title ? item.title : item.url)
+            .attr('href', item.url)
+            .attr('title', item.url);
+        tr.find("p.info_title span.favicon").css('content', 'url("chrome://favicon/' + item.url + '")');
         tr.find("p.info_time span.time_info").text(getVisitTime(item));
         tr.find("p.info_url a.full_url").text(item.url).attr('href', item.url);
+
         historyTable.append(tr);
     });
-   // loading.hide();
 
 }
 
@@ -121,7 +113,7 @@ var traverse = function (item) {
     for (i in item) {
         if (!!item[i] && typeof(item[i]) == "object") {
             if (item[i].hasOwnProperty('url')) {
-                bookmarks.push({parentId: item[i].parentId, title: item[i].title, url: item[i].url});
+                bookmarks.push({id: item[i].id, parentId: item[i].parentId, title: item[i].title, url: item[i].url});
             } else {
                 folders[item[i].id] = {id: item[i].id, title: item[i].title, path: folders[item[i].parentId]};
             }
@@ -157,53 +149,72 @@ var constructBookmarkTable = function () {
     if (bookmarkTable.find(".item").length > 0) {
         return;
     }
-
+    bookmarkTable.find(".item").remove();
+    var hostnames = [];
     bookmarks.forEach(function (item) {
+        hostnames.push(((new URL(item.url)).hostname));
         var tr = trOriginal.clone();
+        tr.removeClass('core_bookmark_item');
         tr.addClass('item');
-        tr.find("p.info_title a.title").text(item.title).attr('href', item.url);
-        tr.find("p.info_title span.favicon").css('content', 'url("chrome://favicon/'+item.url+'")');
+        tr.find("td.select input[name='bookmark[]']").val(item.id);
+        tr.find("p.info_title a.title")
+            .text(item.title ? item.title : item.url)
+            .attr('href', item.url)
+            .attr('title', item.url);
+        tr.find("p.info_title span.favicon").css('content', 'url("chrome://favicon/' + item.url + '")');
         var folderArr = getFolders(folders[item.parentId], []);
         tr.find("p.info_folder span.folder_container").html(folderArr.join('<span class="icon arrow"></span> '));
         tr.find("p.info_url a.full_url").text(item.url).attr('href', item.url);
         bookmarkTable.append(tr);
     });
+    if (bookmarks.length) {
+        var bookmarkDataTable = bookmarkTable.dataTable({
+            "ordering": false,
+            "info": false,
+            "pageLength": 50,
+            "lengthMenu": [10, 25, 50, 100, 500, 1000],
+            "pagingType": "simple",
+            "dom": '<"tools_wrapper"<"left_tools"f><"mid_tools"p><"right_tools"l>>',
+            "language": {
+                search: '',
+                searchPlaceholder: 'Search your bookmark',
+                zeroRecords: 'No bookmark found',
+                lengthMenu: '_MENU_',
 
-    bookmarkTable.dataTable({
-        "ordering": false,
-        "info": false,
-        "pageLength": 50,
-        "lengthMenu": [ 10, 25, 50, 100, 500, 1000],
-        "pagingType": "simple",
-        "dom": '<"tools_wrapper"<"left_tools"f><"mid_tools"p><"right_tools"l>>',
-        "language": {
-            search: '',
-            searchPlaceholder: 'Search your bookmark',
-            zeroRecords: 'No bookmark found',
-            lengthMenu: '_MENU_',
+            }
+        });
 
-        },
-        columnDefs: [ {
-            orderable: false,
-            className: 'select-checkbox',
-            targets:   0
-        } ],
-        select: {
-            style:    'os',
-            selector: 'td:first-child'
-        }
-    });
+
+        $("div.left_tools").append($("#datatableFilters").html());
+
+        var unique = hostnames.filter(onlyUnique);
+        unique.forEach(function (item) {
+            $("#bookmarkWebsiteData").append('<option value="' + item + '">')
+        });
+
+        $('#bookmarkWebsite').keyup(function () {
+            bookmarkDataTable.api().column(1)
+                .search($(this).val())
+                .draw();
+        });
+
+    }
 
 }
 
-
 $(document).ready(function (e) {
-    $("#searchTerm").keyup(function(){
-       var searchTerm = $(this).val();
-       if(searchTerm.length == 0 || searchTerm.length > 2){
-           $("#searchForm").trigger('change');
-       }
+    $("#searchTerm").keyup(function () {
+        var searchTerm = $(this).val();
+        if (searchTerm.length == 0 || searchTerm.length > 2) {
+            $("#searchForm").trigger('change');
+        }
     });
+
+/*
+    $('#website').keyup(function () {
+        $("#searchForm").trigger('change');
+    });
+*/
 
     $("#searchForm").on("submit", function (event) {
         event.preventDefault()
@@ -231,4 +242,41 @@ $(document).ready(function (e) {
         constructBookmarkTable();
 
     });
+
+    $("#allHistories, #allBookmarks").on("change", function () {
+        var recordType = null;
+        if ($(this).attr('id') == 'allHistories') {
+            recordType = 'history';
+        }
+        if ($(this).attr('id') == 'allBookmarks') {
+            recordType = 'bookmark';
+        }
+
+        if (!recordType) return;
+
+        var items = $("#" + recordType + "Container tr.item input[name='" + recordType + "[]']");
+        if ($(this).is(":checked")) {
+            items.prop('checked', true);
+        } else {
+            items.prop('checked', false);
+        }
+        // alert(items.filter(':checked').length);
+
+        var removeButtonObj = $("#remove" + recordType.charAt(0).toUpperCase() + recordType.substr(1));
+        if (items.filter(':checked').length > 0) {
+            removeButtonObj.show().text("Remove (" + items.filter(':checked').length + ") " + recordType + " records");
+        } else {
+            removeButtonObj.hide();
+        }
+        // TODO update remove button lebel
+    });
+
+    $(document).on('change', ".item_table tbody .select input[type='checkbox']", function () {
+       // alert($(this).attr('value'));
+    });
+
+    $(".remove").on("click", function (event) {
+       // alert($(this).attr('id'));
+    });
+
 });
