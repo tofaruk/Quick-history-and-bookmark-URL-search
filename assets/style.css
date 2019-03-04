@@ -1,7 +1,79 @@
-.historyDiv, .bookmarkDiv {
+/*table */
+.container {
     width: 700px;
+    max-height: 700px;
 }
 
+.item_table {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.item_table td.select, .item_table th.select {
+    padding-right: 0;
+    border: 1px solid #ccc;
+}
+.item_table input[type="checkbox"]{
+    margin: 0 9px;
+}
+.item_table td.select {
+    width: 5%;
+}
+
+.item_table td.info {
+    width: 95%;
+    padding: 8px;
+    text-align: left;
+}
+.item_table thead tr:nth-child(odd){
+    background-color: #f2f2f2;
+}
+.item_table tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+.icon {
+    margin-right: 3px;
+    margin-bottom: -4px;
+    width: 16px;
+}
+
+.icon.favicon {
+    margin-bottom: -2px;
+}
+.icon.time {
+    content: url("./icons/time.png");
+}
+.icon.folder {
+    margin-bottom: -2px;
+    content: url("./icons/folder.png");
+}
+
+.icon.arrow {
+    content: url("./icons/right-arrow.png");
+}
+
+.icon.url {
+    content: url("./icons/external.svg");
+}
+.item_table a.title{
+    color: #1a0dab;
+    font-size: 17px;
+    font-weight: 400;
+}
+.item_table a.full_url {
+    color: #006621;
+}
+.item_table a{
+    text-decoration: none;
+}
+.item_table a:hover {
+    text-decoration: underline;
+}
+
+/*end table */
+
+/* Form*/
 .website {
     width: 200px;
 }
@@ -26,39 +98,16 @@
     background-color: #fff;
 }
 
-.historyTable {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
+/* end Form*/
 
-td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-}
-
-tr:nth-child(even) {
-    background-color: #dddddd;
-}
-
-.historyTable #loading, #noData {
-    display: none;
-}
-
-.bookmarkTable {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
+/*data table */
 
 .tools_wrapper .left_tools {
     float: left;
-    width: 32%;
 }
 
 .tools_wrapper .mid_tools {
-    width: 25%;
+
     float: left;
     margin-right: 12px;
     border: 1px solid #ccc;
@@ -68,33 +117,7 @@ tr:nth-child(even) {
 
 .tools_wrapper .right_tools {
     float: left;
-    width: 9%;
-}
 
-.bookmarkTable .core_item {
-    display: none;
-}
-
-.bookmarkTable th {
-    display: none;
-}
-
-.noData p {
-    text-align: center;
-    color: red;
-}
-
-.item .item_info {
-    font-weight: bold;
-    color: #005cbf;
-}
-
-.item .item_info img {
-    margin-right: 10px;
-}
-
-.item_url a {
-    text-decoration-line: none;
 }
 
 .dataTables_wrapper .dataTables_filter {
@@ -110,34 +133,29 @@ tr:nth-child(even) {
 }
 
 .dataTables_wrapper .dataTables_filter input {
+    vertical-align: middle;
+    margin: 0 10px 10px 0;
+    padding: 16px 10px;
     background-color: #fff;
-    height: 34px;
-    border: 1px solid #ccc;
+    border: 1px solid #ddd;
     border-radius: 4px;
-    padding: 10px;
-    margin-left: 0;
-    margin-right: 5px;
-    width: 215px;
+    height: 12px;
     font-size: 15px;
+    width: 210px;
 }
 
 .dataTables_paginate.paging_simple {
     padding: 0;
-    margin: 0;
+    margin: 7px 0;
     font-size: 15px;
 }
 
 .dataTables_wrapper .dataTables_length select {
-    background-color: #fff;
-    height: 34px;
-    border: 1px solid #ccc;
+    margin: 0 5px 10px 0;
     font-size: 16px;
-    padding: 5px 5px 5px 0;
-    margin-left: 5px;
-}
-
-table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
-    background-color: #dddddd;
+    border: 1px solid #ccc;
+    height: 34px;
+    background-color: #fff;
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button {
@@ -146,9 +164,16 @@ table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
     margin-left: 1px;
     margin-right: 1px;
 }
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover{
+    background-color: #000;
+    color: #ffffff;
+}
 .dataTables_wrapper .dataTables_paginate.paging_simple .paginate_button.disabled{
     color: #ccc!important;
 }
+/*end data table */
+
 /* Style the tab */
 .tab {
     overflow: hidden;

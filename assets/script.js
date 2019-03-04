@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 var searchHistory = function (searchTerm, startTime, endTime, limit) {
     var loading = $("#loading");
     loading.show();
+    console.log({searchTerm, startTime, endTime, limit});
     chrome.history.search({
         text: searchTerm,
         startTime: startTime,
@@ -30,44 +31,29 @@ var searchHistory = function (searchTerm, startTime, endTime, limit) {
 }
 
 var constructHistory = function (historyItems) {
-    var historyTable = $("#historyTable");
+    var historyTable = $("#historyContainer .item_table");
+    var trOriginal = $("#coreItemTable .core_history_item");
+
     var loading = $("#loading");
+
     var noData = $("#noData");
-    $("#historyTable .item").remove();
+    $("#historyContainer .item_table .item").remove();
 
     if (historyItems.length > 0) {
         noData.hide();
     } else {
         noData.show();
     }
+    console.log(historyItems.length);
+    console.log(historyItems);
     historyItems.forEach(function (item) {
-        var tr = document.createElement("tr");
-        tr.setAttribute('class', 'item');
-        var td = document.createElement("td");
-        var p_info = document.createElement("p");
-        p_info.setAttribute('class', 'item_info');
-        var p_info_title = document.createElement("span");
-        var p_time = document.createElement("p");
-        p_time.setAttribute('class', 'time');
-        var p_url = document.createElement("p");
-        p_url.setAttribute('class', 'item_url');
-        var url_a = document.createElement("a");
-        url_a.setAttribute('target', '_blank');
-        var favicon = document.createElement('img');
-        favicon.src = 'chrome://favicon/' + item.url;
-        p_info.appendChild(favicon);
-        p_info_title.innerText = item.title ? item.title : item.url;
-        p_info.appendChild(p_info_title);
-        url_a.href = item.url;
-        url_a.innerText = item.url;
-        p_url.append(url_a);
-        var p_time_span = document.createElement('span');
-        p_time_span.innerText = getVisitTime(item);
-        p_time.append(p_time_span);
-        td.append(p_info);
-        td.append(p_time);
-        td.append(p_url);
-        tr.append(td);
+
+        var tr = trOriginal.clone();
+        tr.addClass('item');
+        tr.find("p.info_title a.title").text(item.title).attr('href', item.url);
+        tr.find("p.info_title span.favicon").css('content', 'url("chrome://favicon/'+item.url+'")');
+        tr.find("p.info_time span.time_info").text(getVisitTime(item));
+        tr.find("p.info_url a.full_url").text(item.url).attr('href', item.url);
         historyTable.append(tr);
     });
     loading.hide();
@@ -168,20 +154,20 @@ var getBookTree = function () {
 }
 var constructBookmarkTable = function () {
 
-    var bookmarkTable = $("#bookmarkTable");
-    var trOriginal = $("#bookmarkTable .core_item");
+    var bookmarkTable = $("#bookmarkContainer .item_table");
+    var trOriginal = $("#coreItemTable .core_bookmark_item");
     if (bookmarkTable.find(".item").length > 0) {
         return;
     }
 
     bookmarks.forEach(function (item) {
         var tr = trOriginal.clone();
-        tr.removeClass('core_item').addClass('item');
-        tr.find("td p.item_info span").text(item.title);
-        tr.find("td p.item_info img").attr('src', 'chrome://favicon/' + item.url);
+        tr.addClass('item');
+        tr.find("p.info_title a.title").text(item.title).attr('href', item.url);
+        tr.find("p.info_title span.favicon").css('content', 'url("chrome://favicon/'+item.url+'")');
         var folderArr = getFolders(folders[item.parentId], []);
-        tr.find("td p.time span").text("Folder: " + folderArr.join(' > '));
-        tr.find("td p.item_url a").attr('href', item.url).text(item.url);
+        tr.find("p.info_folder span.folder_container").html(folderArr.join('<span class="icon arrow"></span> '));
+        tr.find("p.info_url a.full_url").text(item.url).attr('href', item.url);
         bookmarkTable.append(tr);
     });
 
@@ -198,6 +184,15 @@ var constructBookmarkTable = function () {
             zeroRecords: 'No bookmark found',
             lengthMenu: '_MENU_',
 
+        },
+        columnDefs: [ {
+            orderable: false,
+            className: 'select-checkbox',
+            targets:   0
+        } ],
+        select: {
+            style:    'os',
+            selector: 'td:first-child'
         }
     });
 
@@ -228,19 +223,6 @@ $(document).ready(function (e) {
 
         event.preventDefault();
         return false;
-    });
-
-    $('#onoffswitch').change(function () {
-        if ($(this).is(":checked")) {
-            $("#historyContainer").show();
-            $("#bookmarkContainer").hide();
-
-        } else {
-
-            $("#bookmarkContainer").show();
-            $("#historyContainer").hide();
-
-        }
     });
 
     $(".tab .tablinks").click(function () {

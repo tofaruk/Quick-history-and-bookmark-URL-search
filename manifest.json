@@ -7,7 +7,7 @@
     "persistent": false
   },
   "browser_action": {
-    "default_icon": "assets/searchHistory.png",
+    "default_icon": "assets/icons/searchHistory.png",
     "default_popup": "index.html",
     "default_title": "Easy search history and bookmark URL!!"
   },
