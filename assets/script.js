@@ -18,9 +18,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
 var searchHistory = function (searchTerm, startTime, endTime, limit) {
-    var loading = $("#loading");
-    loading.show();
-    console.log({searchTerm, startTime, endTime, limit});
+  //  var loading = $("#loading");
+  //  loading.show();
+    //console.log({searchTerm, startTime, endTime, limit});
     chrome.history.search({
         text: searchTerm,
         startTime: startTime,
@@ -33,19 +33,17 @@ var searchHistory = function (searchTerm, startTime, endTime, limit) {
 var constructHistory = function (historyItems) {
     var historyTable = $("#historyContainer .item_table");
     var trOriginal = $("#coreItemTable .core_history_item");
-
-    var loading = $("#loading");
-
-    var noData = $("#noData");
     $("#historyContainer .item_table .item").remove();
 
+    /* var loading = $("#loading");
+     var noData = $("#noData");
     if (historyItems.length > 0) {
         noData.hide();
     } else {
         noData.show();
     }
-    console.log(historyItems.length);
-    console.log(historyItems);
+
+*/
     historyItems.forEach(function (item) {
 
         var tr = trOriginal.clone();
@@ -56,7 +54,7 @@ var constructHistory = function (historyItems) {
         tr.find("p.info_url a.full_url").text(item.url).attr('href', item.url);
         historyTable.append(tr);
     });
-    loading.hide();
+   // loading.hide();
 
 }
 
@@ -70,7 +68,7 @@ var buildNavigationOptions = function () {
 
 var constructNavigationOptions = function (historyItems) {
     var searchForm = $("#searchForm");
-    var websiteSelect = $("#website");
+    var websiteSelect = $("#websiteData");
     var hostnames = [];
     var months = [];
     historyItems.forEach(function (item) {
@@ -80,7 +78,7 @@ var constructNavigationOptions = function (historyItems) {
 
     var unique = hostnames.filter(onlyUnique);
     unique.forEach(function (item) {
-        websiteSelect.append('<option value="' + item + '">' + item + '</option>')
+        websiteSelect.append('<option value="' + item + '">')
     });
 
 
