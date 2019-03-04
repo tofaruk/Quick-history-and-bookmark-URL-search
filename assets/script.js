@@ -36,7 +36,7 @@ var constructHistory = function (historyItems) {
         var tr = trOriginal.clone();
         tr.removeClass('core_history_item');
         tr.addClass('item');
-        tr.find("td.select input[name='history[]']").val(item.id);
+        tr.find("td.select input[name='history[]']").val(item.url);
         tr.find("p.info_title a.title")
             .text(item.title ? item.title : item.url)
             .attr('href', item.url)
@@ -202,19 +202,30 @@ var constructBookmarkTable = function () {
 
 }
 
+
+var updateRemoveButton = function(recordType) {
+    var items = $("#" + recordType + "Container tr.item input[name='" + recordType + "[]']");
+    var removeButtonObj = $("#remove" + recordType.charAt(0).toUpperCase() + recordType.substr(1));
+    if (items.filter(':checked').length > 0) {
+        removeButtonObj.show().text("Remove (" + items.filter(':checked').length + ") " + recordType + " records");
+    } else {
+        removeButtonObj.text("Remove " + recordType + " record");
+    }
+}
+var getRecordType = function(obj) {
+    var tabcontentId = $(obj).closest('.tabcontent').attr('id');
+    var recordType = tabcontentId.replace("Container", "");
+    return recordType;
+}
+
 $(document).ready(function (e) {
-    $("#searchTerm").keyup(function () {
+    $("#searchTerm, #website").keyup(function () {
         var searchTerm = $(this).val();
         if (searchTerm.length == 0 || searchTerm.length > 2) {
             $("#searchForm").trigger('change');
         }
     });
 
-/*
-    $('#website').keyup(function () {
-        $("#searchForm").trigger('change');
-    });
-*/
 
     $("#searchForm").on("submit", function (event) {
         event.preventDefault()
@@ -244,15 +255,7 @@ $(document).ready(function (e) {
     });
 
     $("#allHistories, #allBookmarks").on("change", function () {
-        var recordType = null;
-        if ($(this).attr('id') == 'allHistories') {
-            recordType = 'history';
-        }
-        if ($(this).attr('id') == 'allBookmarks') {
-            recordType = 'bookmark';
-        }
-
-        if (!recordType) return;
+        var recordType = getRecordType(this);
 
         var items = $("#" + recordType + "Container tr.item input[name='" + recordType + "[]']");
         if ($(this).is(":checked")) {
@@ -260,23 +263,33 @@ $(document).ready(function (e) {
         } else {
             items.prop('checked', false);
         }
-        // alert(items.filter(':checked').length);
 
-        var removeButtonObj = $("#remove" + recordType.charAt(0).toUpperCase() + recordType.substr(1));
-        if (items.filter(':checked').length > 0) {
-            removeButtonObj.show().text("Remove (" + items.filter(':checked').length + ") " + recordType + " records");
-        } else {
-            removeButtonObj.hide();
-        }
-        // TODO update remove button lebel
+        updateRemoveButton(recordType);
+
     });
 
     $(document).on('change', ".item_table tbody .select input[type='checkbox']", function () {
-       // alert($(this).attr('value'));
+        updateRemoveButton(getRecordType(this));
     });
 
     $(".remove").on("click", function (event) {
-       // alert($(this).attr('id'));
+        var recordType = getRecordType(this);
+        var items = $("#" + recordType + "Container tr.item input[name='" + recordType + "[]']");
+
+        $.each(items.filter(':checked'), function(){
+            if(recordType =="history"){
+                chrome.history.deleteUrl({ url: $(this).val()});
+                $("#searchForm").trigger('change');
+            }
+            if(recordType =="bookmark"){
+                chrome.bookmarks.remove( $(this).val());
+            }
+
+            $(this).prop('checked', false).closest('tr.item').hide();
+        });
+
+        updateRemoveButton(recordType);
+
     });
 
 });
