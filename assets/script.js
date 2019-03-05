@@ -105,7 +105,14 @@ function getStartAndEndTimeFromFilterOption() {
         startTime = (new Date).getTime() - (kMillisecondsPerWeek * (parseInt(timeFilterArray[0]) + 1));
 
     }
-    return {endTime: endTime, startTime: startTime};
+    
+    // setting start and end of the dat
+    var startDate = new Date(startTime)
+    startDate.setHours(0, 0, 0, 0);
+    var endDate = new Date(endTime)
+    endDate.setHours(23, 59, 59, 999);
+
+    return {endTime: endDate.getTime(), startTime: startDate.getTime()};
 }
 
 
