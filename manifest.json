@@ -1,20 +1,28 @@
 {
   "name": "Quick history and bookmark URL search",
+  "description": "Easily search your browser history and bookmark URLs.Remove unnecessary URLs.",
+  "manifest_version": 2,
   "version": "1.0",
-  "description": "Quick search from your browser history and bookmark URL. Easily search with filter option.",
+  "offline_enabled": true,
   "background": {
     "scripts": ["assets/background.js"],
     "persistent": false
   },
   "browser_action": {
-    "default_icon": "assets/icons/searchHistory.png",
+    "default_icon": "assets/icons/searchHistory16.png",
     "default_popup": "index.html",
-    "default_title": "Easy search history and bookmark URL!!"
+    "default_title": "Quick search history and bookmark URL!!"
   },
-  "manifest_version": 2,
+
   "permissions": [
     "history",
     "bookmarks",
     "chrome://favicon/"
-  ]
+  ],
+  "icons": {
+    "16": "assets/icons/searchHistory16.png",
+    "32": "assets/icons/searchHistory32.png",
+    "48": "assets/icons/searchHistory48.png",
+    "128": "assets/icons/searchHistory128.png"
+  }
 }

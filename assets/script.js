@@ -48,7 +48,7 @@ var constructHistory = function (historyItems) {
 
         historyTable.append(tr);
     });
-    if(historyItems.length==0){
+    if (historyItems.length == 0) {
         $(".item_table .noData").show();
     }
 }
@@ -157,7 +157,7 @@ var constructBookmarkTable = function () {
     var bookmarkTable = $("#bookmarkContainer .item_table");
     var trOriginal = $("#coreItemTable .core_bookmark_item");
 
-    if ($.fn.DataTable.isDataTable("#bookmarkContainer .item_table") ) {
+    if ($.fn.DataTable.isDataTable("#bookmarkContainer .item_table")) {
         return;
     }
 
@@ -179,7 +179,7 @@ var constructBookmarkTable = function () {
         tr.find("p.info_url a.full_url").text(item.url).attr('href', item.url);
         bookmarkTable.append(tr);
     });
-    if (bookmarks.length >0) {
+    if (bookmarks.length > 0) {
         var bookmarkDataTable = bookmarkTable.dataTable({
             "ordering": false,
             "info": false,
@@ -219,30 +219,30 @@ var constructBookmarkTable = function () {
 }
 
 
-var resetRemoveCheckBoxes = function(recordType) {
+var resetRemoveCheckBoxes = function (recordType) {
     $("#" + recordType + "Container tr input[type='checkbox']").prop('checked', false);
     updateRemoveButton(recordType);
 }
-var updateRemoveButton = function(recordType) {
+var updateRemoveButton = function (recordType) {
     var items = $("#" + recordType + "Container tr.item input[name='" + recordType + "[]']");
     var removeButtonObj = $("#remove" + recordType.charAt(0).toUpperCase() + recordType.substr(1));
     if (items.filter(':checked').length > 0) {
         var record = ' record';
-        if(items.filter(':checked').length > 1){
-            record=' records';
+        if (items.filter(':checked').length > 1) {
+            record = ' records';
         }
         removeButtonObj.show().text("Remove (" + items.filter(':checked').length + ") " + recordType + record);
     } else {
         removeButtonObj.text("Remove " + recordType + " record");
     }
 }
-var getRecordType = function(obj) {
+var getRecordType = function (obj) {
     var tabcontentId = $(obj).closest('.tabcontent').attr('id');
     var recordType = tabcontentId.replace("Container", "");
     return recordType;
 }
 
-$(document).ready(function (e) {
+$(document).ready(function () {
     $("#searchTerm, #website").keyup(function () {
         var searchTerm = $(this).val();
         if (searchTerm.length == 0 || searchTerm.length > 2) {
@@ -253,7 +253,7 @@ $(document).ready(function (e) {
 
     $("#searchForm").on("submit", function (event) {
         event.preventDefault()
-    })
+    });
 
     $("#searchForm").change(function (event) {
         var searchTermInput = $("#searchTerm");
@@ -296,17 +296,17 @@ $(document).ready(function (e) {
         updateRemoveButton(getRecordType(this));
     });
 
-    $(".remove").on("click", function (event) {
+    $(".remove").on("click", function () {
         var recordType = getRecordType(this);
         var items = $("#" + recordType + "Container tr.item input[name='" + recordType + "[]']");
 
-        $.each(items.filter(':checked'), function(){
-            if(recordType =="history"){
-                chrome.history.deleteUrl({ url: $(this).val()});
+        $.each(items.filter(':checked'), function () {
+            if (recordType == "history") {
+                chrome.history.deleteUrl({url: $(this).val()});
                 $("#searchForm").trigger('change');
             }
-            if(recordType =="bookmark"){
-                chrome.bookmarks.remove( $(this).val());
+            if (recordType == "bookmark") {
+                chrome.bookmarks.remove($(this).val());
             }
 
             $(this).prop('checked', false).closest('tr.item').hide();
