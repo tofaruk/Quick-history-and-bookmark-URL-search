@@ -29,6 +29,7 @@ var searchHistory = function (searchTerm, startTime, endTime, limit) {
 var constructHistory = function (historyItems) {
     var historyTable = $("#historyContainer .item_table");
     var trOriginal = $("#coreItemTable .core_history_item");
+    $(".item_table .noData").hide();
     historyTable.find(".item").remove();
 
     historyItems.forEach(function (item) {
@@ -47,7 +48,9 @@ var constructHistory = function (historyItems) {
 
         historyTable.append(tr);
     });
-
+    if(historyItems.length==0){
+        $(".item_table .noData").show();
+    }
 }
 
 var buildNavigationOptions = function () {
@@ -105,7 +108,7 @@ function getStartAndEndTimeFromFilterOption() {
         startTime = (new Date).getTime() - (kMillisecondsPerWeek * (parseInt(timeFilterArray[0]) + 1));
 
     }
-    
+
     // setting start and end of the dat
     var startDate = new Date(startTime)
     startDate.setHours(0, 0, 0, 0);
@@ -153,9 +156,11 @@ var constructBookmarkTable = function () {
 
     var bookmarkTable = $("#bookmarkContainer .item_table");
     var trOriginal = $("#coreItemTable .core_bookmark_item");
-    if (bookmarkTable.find(".item").length > 0) {
+
+    if ($.fn.DataTable.isDataTable("#bookmarkContainer .item_table") ) {
         return;
     }
+
     bookmarkTable.find(".item").remove();
     var hostnames = [];
     bookmarks.forEach(function (item) {
@@ -174,7 +179,7 @@ var constructBookmarkTable = function () {
         tr.find("p.info_url a.full_url").text(item.url).attr('href', item.url);
         bookmarkTable.append(tr);
     });
-    if (bookmarks.length) {
+    if (bookmarks.length >0) {
         var bookmarkDataTable = bookmarkTable.dataTable({
             "ordering": false,
             "info": false,
@@ -185,12 +190,16 @@ var constructBookmarkTable = function () {
             "language": {
                 search: '',
                 searchPlaceholder: 'Search your bookmark',
-                zeroRecords: 'No bookmark found',
+                zeroRecords: '<p>No bookmark found</p>',
                 lengthMenu: '_MENU_',
 
             }
         });
 
+        bookmarkDataTable.on('search.dt', function () {
+            // after search apply on datatable
+            resetRemoveCheckBoxes('bookmark');
+        });
 
         $("div.left_tools").append($("#datatableFilters").html());
 
@@ -210,11 +219,19 @@ var constructBookmarkTable = function () {
 }
 
 
+var resetRemoveCheckBoxes = function(recordType) {
+    $("#" + recordType + "Container tr input[type='checkbox']").prop('checked', false);
+    updateRemoveButton(recordType);
+}
 var updateRemoveButton = function(recordType) {
     var items = $("#" + recordType + "Container tr.item input[name='" + recordType + "[]']");
     var removeButtonObj = $("#remove" + recordType.charAt(0).toUpperCase() + recordType.substr(1));
     if (items.filter(':checked').length > 0) {
-        removeButtonObj.show().text("Remove (" + items.filter(':checked').length + ") " + recordType + " records");
+        var record = ' record';
+        if(items.filter(':checked').length > 1){
+            record=' records';
+        }
+        removeButtonObj.show().text("Remove (" + items.filter(':checked').length + ") " + recordType + record);
     } else {
         removeButtonObj.text("Remove " + recordType + " record");
     }
@@ -244,7 +261,7 @@ $(document).ready(function (e) {
         var limitSelect = $("#limit");
 
         var startAndEndTime = getStartAndEndTimeFromFilterOption();
-
+        resetRemoveCheckBoxes('history');
         var text = String(searchTermInput.val() + ' ' + websiteSelect.val());
         searchHistory($.trim(text), startAndEndTime.startTime, startAndEndTime.endTime, parseInt(limitSelect.val()));
 
@@ -297,6 +314,19 @@ $(document).ready(function (e) {
 
         updateRemoveButton(recordType);
 
+    });
+
+    $(document).on("click", "#website, #bookmarkWebsite", function () {
+        $(this).attr('placeholder', $(this).val());
+        $(this).attr('old-value', $(this).val());
+        $(this).val('');
+    });
+
+    $(document).on("blur", "#website, #bookmarkWebsite", function () {
+        $(this).attr('placeholder', 'Website');
+        if (!$(this).val()) {
+            $(this).val($(this).attr('old-value'));
+        }
     });
 
 });

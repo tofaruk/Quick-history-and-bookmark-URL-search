@@ -22,12 +22,17 @@
 .item_table td.select {
     width: 5%;
 }
-
-.item_table th {
-    height: 32px;
+.item_table thead th.select{
     width: 30px;
 }
-
+.item_table th {
+    height: 32px;
+}
+.item_table .noData{ display: none;}
+.item_table .noData p, .item_table .dataTables_empty p{
+    font-weight: bold;
+    padding: 0 10px;
+}
 .item_table td.info {
     padding: 8px;
     text-align: left;
@@ -189,14 +194,15 @@ p.info_url {
 
 .dataTables_wrapper .dataTables_paginate .paginate_button {
     border-radius: 4px;
-    padding: 6px 19px;
+    padding: 6px 17px;
+    border: 1px solid #fff;
     margin-left: 1px;
     margin-right: 1px;
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-    background-color: #000;
-    color: #ffffff;
+    border: 1px solid #17a2b8;
+    color: #17a2b8;
 }
 
 .dataTables_wrapper .dataTables_paginate.paging_simple .paginate_button.disabled {
@@ -232,6 +238,7 @@ p.info_url {
 /* Create an active/current tablink class */
 .tab button.active {
     background-color: #ccc;
+    color: white;
 }
 
 /* Style the tab content */
@@ -246,9 +253,14 @@ p.info_url {
 button.remove {
     float: left;
     padding: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid red;
+    color: red;
     border-radius: 4px;
     margin-bottom: 2px;
     margin-left: 5px;
+    font-weight: bold;
+}
+
+button.remove:hover {
     background-color: #ccc;
 }

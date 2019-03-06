@@ -18,7 +18,7 @@
             <form id="searchForm" class="searchForm" method="post">
                 <input type="text" id="searchTerm" name="searchTerm" placeholder="Search your history">
 
-                <input id="website" list="websiteData" placeholder="Website">
+                <input id="website" list="websiteData" old-value="" placeholder="Website">
                 <datalist id="websiteData">
                 </datalist>
                 <select id="time_filter" class="time_filter" style="width: 160px;">
@@ -63,6 +63,9 @@
             </tr>
             </thead>
             <tbody>
+                <tr class="noData">
+                    <td colspan="2"><p>No history found</p></td>
+                <tr>
 
             </tbody>
         </table>
@@ -131,7 +134,7 @@
 </table>
 <div id="datatableFilters" style="display: none;">
     <div class="filterByWebsite">
-        <input id="bookmarkWebsite" list="bookmarkWebsiteData" placeholder="Website">
+        <input id="bookmarkWebsite" old-value="" list="bookmarkWebsiteData" placeholder="Website">
         <datalist id="bookmarkWebsiteData">
     </div>
 </div>
