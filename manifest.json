@@ -1,6 +1,6 @@
 {
   "name": "Quick history and bookmark URL search",
-  "description": "Easily search your browser history and bookmark URLs.Remove unnecessary URLs.",
+  "description": "Easily search your browser history and bookmark URLs. Remove unnecessary URLs.",
   "manifest_version": 2,
   "version": "1.0",
   "offline_enabled": true,
@@ -9,7 +9,7 @@
     "persistent": false
   },
   "browser_action": {
-    "default_icon": "assets/icons/searchHistory16.png",
+    "default_icon": "assets/icons/searchHistory128.png",
     "default_popup": "index.html",
     "default_title": "Quick search history and bookmark URL!!"
   },
