@@ -1,5 +1,6 @@
 {
   "name": "Quick history and bookmark URL search",
+  "short_name": "Quick URL search",
   "description": "Easily search your browser history and bookmark URLs. Remove unnecessary URLs.",
   "manifest_version": 2,
   "version": "1.0",
