@@ -49,6 +49,12 @@ var constructHistory = function (historyItems) {
         historyTable.append(tr);
     });
     if (historyItems.length == 0) {
+        var limitSelect = $("#time_filter option:selected");
+        var message_suffix = '';
+        if (!($("#searchTerm").val() || $("#website").val())) {
+            message_suffix = ' for : ' + limitSelect.text();
+        }
+        $(".item_table .noData p").text("No history found" + message_suffix);
         $(".item_table .noData").show();
     }
 }
