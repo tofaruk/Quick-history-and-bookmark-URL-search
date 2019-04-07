@@ -1,9 +1,9 @@
 # Quick-history-and-bookmark-URL-search
 Quick search history and bookmark url. Filter history by website , time and  custom search term. Filter bookmark by folder name , url and url-title
 
+[Install from chrome web store ](https://chrome.google.com/webstore/detail/quick-history-and-bookmar/mdcalafbjmpoakifofkmkcmocdkilbhp)
 
-
-## Features for browser history  and bookmarks 
+### Features for browser history  and bookmarks 
 
 #### Search features 
 - In input box : You can search with anything which can be matched either with URL or page title 
@@ -25,4 +25,11 @@ Quick search history and bookmark url. Filter history by website , time and  cus
 - For browser history, you will see the exact date and time of your last visit. 
 - For bookmarks, you can search with both URL and folder name. You can see your bookmarked URL's folder hierarchy.
 ## Screen Shots
-![Quick-history-and-bookmark-URL-search](https://raw.githubusercontent.com/rbrahul/Awesome-JSON/master/awesome-json-slideshow.gif "Quick search history and bookmark url. Filter history by website , time and custom search term. Filter bookmark by folder name , url and url-title")
+![Quick-history-and-bookmark-URL-search](assets/screenshots.gif "Quick search history and bookmark url. Filter history by website , time and custom search term. Filter bookmark by folder name , url and url-title")
+
+### Using tools
+[jQuery 3.3.1](https://jquery.com)
+
+[DataTables 1.10.19](https://datatables.net)
+
+[HTML & CSS](#)
