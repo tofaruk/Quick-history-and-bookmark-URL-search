@@ -105,12 +105,10 @@ function getStartAndEndTimeFromFilterOption() {
     var endTime = (new Date).getTime();
     var startTime = (new Date).getTime() - (kMillisecondsPerDay);
     if (timeFilterArray[0] != '0' && timeFilterArray[1] == 'd') {
-        endTime = (new Date).getTime() - (kMillisecondsPerDay * parseInt(timeFilterArray[0]));
         startTime = (new Date).getTime() - (kMillisecondsPerDay * (parseInt(timeFilterArray[0]) + 1));
 
     }
     if (timeFilterArray[0] != '0' && timeFilterArray[1] == 'w') {
-        endTime = (new Date).getTime() - (kMillisecondsPerWeek * parseInt(timeFilterArray[0]));
         startTime = (new Date).getTime() - (kMillisecondsPerWeek * (parseInt(timeFilterArray[0]) + 1));
 
     }
@@ -195,7 +193,7 @@ var constructBookmarkTable = function () {
             "dom": '<"tools_wrapper"<"left_tools"f><"mid_tools"p><"right_tools"l>>',
             "language": {
                 search: '',
-                searchPlaceholder: 'Search your bookmark',
+                searchPlaceholder: 'Search bookmark',
                 zeroRecords: '<p>No bookmark found</p>',
                 lengthMenu: '_MENU_',
 
@@ -249,6 +247,21 @@ var getRecordType = function (obj) {
 }
 
 $(document).ready(function () {
+    $('#otherOptionsTable').DataTable({
+        "ordering": false,
+        "info": false,
+        "pageLength": 50,
+        "pagingType": "simple",
+        "dom": '<"tools_wrapper"<"left_tools"f><"mid_tools"p><"right_tools"l>>',
+        "language": {
+            search: '',
+            searchPlaceholder: 'Search your option',
+            zeroRecords: '<p>No option found</p>',
+            lengthMenu: '_MENU_',
+
+        }
+    });
+
     $("#searchTerm, #website").keyup(function () {
         var searchTerm = $(this).val();
         if (searchTerm.length == 0 || searchTerm.length > 2) {
@@ -333,6 +346,11 @@ $(document).ready(function () {
         if (!$(this).val()) {
             $(this).val($(this).attr('old-value'));
         }
+    });
+
+    $(document).on("click", ".linkTo", function () {
+        $(this).attr('href');
+        chrome.tabs.create({'url': $(this).attr('href'), 'active': true});
     });
 
 });

@@ -6,13 +6,11 @@
 
 .item_table {
     width: 100%;
-    border: 1px solid #ccc;
     border-radius: 3px;
 }
 
 .item_table td.select, .item_table th.select {
     padding-right: 0;
-    border: 1px solid #ccc;
 }
 
 .item_table input[type="checkbox"] {
@@ -22,17 +20,36 @@
 .item_table td.select {
     width: 5%;
 }
-.item_table thead th.select{
+.item_table thead span.th-nav{
+    width: 50%;
+}
+.item_table thead span.th-nav.th-manage{
+
+}
+.item_table thead span.th-nav.th-manage a{
+    float: right;
+    padding: 8px;
+    color: red;
+    margin-bottom: 2px;
+    margin-right: 15px;
+}
+.item_table thead th.select {
     width: 30px;
 }
+
 .item_table th {
     height: 32px;
 }
-.item_table .noData{ display: none;}
-.item_table .noData p, .item_table .dataTables_empty p{
+
+.item_table .noData {
+    display: none;
+}
+
+.item_table .noData p, .item_table .dataTables_empty p {
     font-weight: bold;
     padding: 0 10px;
 }
+
 .item_table td.info {
     padding: 8px;
     text-align: left;
@@ -44,6 +61,10 @@
 
 .item_table tr:nth-child(even) {
     background-color: #f2f2f2;
+}
+
+.item_table tr:nth-child(odd) {
+    background-color: #F2F2EA;
 }
 
 .icon {
@@ -105,12 +126,13 @@ p.info_url {
 
 .searchForm input {
     vertical-align: middle;
-    margin: 5px 5px 10px 0;
+    margin: 10px 5px 10px 0;
     padding: 10px;
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 4px;
     height: 12px;
+    width: 188px;
     font-size: 15px;
 }
 
@@ -126,6 +148,13 @@ p.info_url {
 /* end Form*/
 
 /*data table */
+#othersContainer .filterByWebsite {
+    visibility: hidden;
+}
+
+.tools_wrapper {
+    margin: 5px 0;
+}
 
 .tools_wrapper .left_tools {
     float: left;
@@ -198,23 +227,26 @@ p.info_url {
     border: 1px solid #fff;
     margin-left: 1px;
     margin-right: 1px;
+    background-color: #ccc;
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-    border: 1px solid #17a2b8;
-    color: #17a2b8;
+    border: 1px solid grey;
+    color: white;
 }
 
 .dataTables_wrapper .dataTables_paginate.paging_simple .paginate_button.disabled {
-    color: #ccc !important;
+    color: white;
+    cursor: not-allowed;
 }
-
+#otherOptionsTable tbody td.info p{
+    margin: 0;
+}
 /*end data table */
 
 /* Style the tab */
 .tab {
     overflow: hidden;
-    border: 1px solid #ccc;
     background-color: #f1f1f1;
 }
 
@@ -244,8 +276,6 @@ p.info_url {
 /* Style the tab content */
 .tabcontent {
     display: none;
-    padding: 6px 12px;
-    border: 1px solid #ccc;
     border-top: none;
 }
 
@@ -259,6 +289,7 @@ button.remove {
     margin-bottom: 2px;
     margin-left: 5px;
     font-weight: bold;
+    background-color: transparent;
 }
 
 button.remove:hover {

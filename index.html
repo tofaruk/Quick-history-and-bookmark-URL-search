@@ -11,20 +11,21 @@
     <div class="tab">
         <button class="tablinks active" data-name="historyContainer">History</button>
         <button class="tablinks" data-name="bookmarkContainer">Bookmark</button>
+        <button class="tablinks" data-name="othersContainer">Other Options</button>
     </div>
 
     <div id="historyContainer" class="tabcontent" style="display: block;">
         <div>
             <form id="searchForm" class="searchForm" method="post">
-                <input type="text" id="searchTerm" name="searchTerm" placeholder="Search your history">
+                <input type="text" id="searchTerm" name="searchTerm" placeholder="Search history">
 
                 <input id="website" list="websiteData" old-value="" placeholder="Website">
                 <datalist id="websiteData">
                 </datalist>
                 <select id="time_filter" class="time_filter" style="width: 160px;">
                     <optgroup label="Current week">
-                        <option selected value="0-d">Today</option>
-                        <option value="1-d">Yesterday</option>
+                        <option value="0-d">Today</option>
+                        <option value="1-d">1 day ago</option>
                         <option value="2-d">2 days ago</option>
                         <option value="3-d">3 days ago</option>
                         <option value="4-d">4 days ago</option>
@@ -32,7 +33,7 @@
                         <option value="6-d">6 days ago</option>
                     </optgroup>
 
-                    <option value="1-w">1 week ago</option>
+                    <option selected value="1-w">1 week ago</option>
                     <option value="2-w">2 weeks ago</option>
                     <option value="3-w">3 weeks ago</option>
                     <option value="4-w">4 weeks ago</option>
@@ -58,7 +59,8 @@
                     <input type="checkbox" id="allHistories" name="all_histories">
                 </th>
                 <th>
-                    <button id="removeHistory" class="remove">Remove history record</button>
+                    <span class="th-nav"><button id="removeHistory" class="remove">Remove history record</button></span>
+                    <span class="th-nav th-manage"> <a class="linkTo" href="chrome://history/">Manage History</a></span>
                 </th>
             </tr>
             </thead>
@@ -78,12 +80,32 @@
                     <input type="checkbox" id="allBookmarks" name="all_bookmarks">
                 </th>
                 <th>
-                    <button id="removeBookmark" class="remove">Remove bookmark record</button>
+                    <span class="th-nav"><button id="removeBookmark" class="remove">Remove bookmark record</button></span>
+                    <span class="th-nav th-manage"> <a class="linkTo" href="chrome://bookmarks/">Manage Bookmark</a>
+                    </span>
                 </th>
             </tr>
             </thead>
             <tbody>
 
+            </tbody>
+        </table>
+    </div>
+    <div id="othersContainer" class="tabcontent" style="display: none;">
+        <table id="otherOptionsTable" class="item_table">
+            <thead style="display: none">
+            <tr>
+                <th></th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="even">
+                <td class="info"><p><a class="linkTo" href="chrome://history/">Manage History</a></p></td>
+            </tr>
+            <tr class="odd">
+                <td class="info"><p><a class="linkTo" href="chrome://settings/clearBrowserData">Clear browsing data</a></p></td>
+            </tr>
             </tbody>
         </table>
     </div>
@@ -95,13 +117,13 @@
 
     <tr class="item core_history_item">
         <td class="select"><input type="checkbox" name="history[]" value=""></td>
-        <td class="info">
+        <td colspan="2" class="info">
             <p class="info_title">
                 <span class="icon favicon" style=""></span>
                 <a class="title" target="_blank" href=""></a>
             </p>
             <p class="info_time">
-                <span class="icon time" style=""></span>
+                <span class="icon time" style=""></span> Last Visit Time on :
                 <span class="time_info"></span>
             </p>
             <p class="info_url">
