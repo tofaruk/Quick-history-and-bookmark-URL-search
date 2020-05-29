@@ -244,6 +244,11 @@ p.info_url {
     margin: 0;
     width: 680px;
 }
+#otherOptionsTable tbody td p a{
+    color: #1a0dab;
+    font-size: 17px;
+    font-weight: 400;
+}
 /*end data table */
 
 /* Style the tab */

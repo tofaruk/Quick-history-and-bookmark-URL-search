@@ -1,52 +1,52 @@
 [
   {
     "title": "Manage History",
-    "keyword": "Manage,History",
+    "keyword": "all,chrome",
     "link": "chrome://history/"
   },
   {
     "title": "Clear Browsing Data",
-    "keyword": "Clear,Browsing,Data",
+    "keyword": "history,cookies,download,cached,autofill,password,address",
     "link": "chrome://settings/clearBrowserData"
   },
   {
-    "title": "Manage Auto Fill Passwords",
-    "keyword": "Manage Auto Fill Passwords",
+    "title": "View and manage saved passwords in your google account",
+    "keyword": "Auto Sign-in,Auto Fill Passwords,show password",
     "link": "chrome://settings/passwords"
   },
   {
     "title": "Manage Auto Fill Addresses",
-    "keyword": "Manage Auto Fill Addresses",
+    "keyword": "mobile numbers,phone numbers, email addresses and delivery addresses, shipping addresses",
     "link": "chrome://settings/addresses"
   },
   {
-    "title": "About Chrome",
-    "keyword": "About Chrome",
+    "title": "About Chrome/ Update chrome ",
+    "keyword": "version,number, Google Chrome is up to date, Automatically update Chrome for all users Learn more",
     "link": "chrome://settings/help"
   },
   {
     "title": "Manage Search Engines",
-    "keyword": "Manage Search Engines",
+    "keyword": "set default",
     "link": "chrome://settings/searchEngines"
   },
   {
     "title": "Manage Extensions",
-    "keyword": "Manage Extensions",
+    "keyword": "remove, delete, enable,disable, details, update, plugin, developer mode ",
     "link": "chrome://extensions/"
   },
   {
     "title": "Manage Languages",
-    "keyword": "Manage Languages",
+    "keyword": "Spell check, add, remove, translate",
     "link": "chrome://settings/languages"
   },
   {
-    "title": "Manage Downloads Directory",
-    "keyword": "Manage Downloads Directory",
+    "title": "Manage Downloads",
+    "keyword": "change , directory, history, ask",
     "link": "chrome://settings/downloads"
   },
   {
     "title": "Manage Printing",
-    "keyword": "Manage Printing",
+    "keyword": "google cloud",
     "link": "chrome://settings/printing"
   },
   {

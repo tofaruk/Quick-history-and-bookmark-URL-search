@@ -267,7 +267,7 @@ var updateOptionTable = function () {
             "dom": '<"tools_wrapper"<"left_tools"f><"mid_tools"p><"right_tools"l>>',
             "language": {
                 search: '',
-                searchPlaceholder: 'Search your option',
+                searchPlaceholder: 'Search browser option',
                 zeroRecords: '<p>No option found</p>',
                 lengthMenu: '_MENU_',
 
