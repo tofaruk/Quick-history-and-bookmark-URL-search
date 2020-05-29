@@ -102,6 +102,7 @@ p.info_url {
     color: #1a0dab;
     font-size: 17px;
     font-weight: 400;
+    overflow-wrap:anywhere;
 }
 
 .item_table a.full_url {
@@ -239,8 +240,9 @@ p.info_url {
     color: white;
     cursor: not-allowed;
 }
-#otherOptionsTable tbody td.info p{
+#otherOptionsTable tbody td p{
     margin: 0;
+    width: 680px;
 }
 /*end data table */
 

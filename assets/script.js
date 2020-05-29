@@ -125,7 +125,7 @@ function getStartAndEndTimeFromFilterOption() {
 
 var traverse = function (item) {
     for (i in item) {
-        if (!!item[i] && typeof(item[i]) == "object") {
+        if (!!item[i] && typeof (item[i]) == "object") {
             if (item[i].hasOwnProperty('url')) {
                 bookmarks.push({id: item[i].id, parentId: item[i].parentId, title: item[i].title, url: item[i].url});
             } else {
@@ -246,21 +246,52 @@ var getRecordType = function (obj) {
     return recordType;
 }
 
-$(document).ready(function () {
-    $('#otherOptionsTable').DataTable({
-        "ordering": false,
-        "info": false,
-        "pageLength": 50,
-        "pagingType": "simple",
-        "dom": '<"tools_wrapper"<"left_tools"f><"mid_tools"p><"right_tools"l>>',
-        "language": {
-            search: '',
-            searchPlaceholder: 'Search your option',
-            zeroRecords: '<p>No option found</p>',
-            lengthMenu: '_MENU_',
+var updateOptionTable = function () {
+    $.getJSON("assets/otherOptions.json", function (data) {
+        var otherOptionsTable = $("#otherOptionsTable");
+        var items = [];
+        $.each(data, function (key, val) {
+            items.push({
+                item: {
+                    keyword: val.keyword + ',' + val.title,
+                    display: '<p><a class="linkTo" href="' + val.link + '">' + val.title + '</a></p>'
+                }
+            });
+        });
 
-        }
+        otherOptionsTable.DataTable({
+            "ordering": false,
+            "info": false,
+            "pageLength": 10,
+            "pagingType": "simple",
+            "dom": '<"tools_wrapper"<"left_tools"f><"mid_tools"p><"right_tools"l>>',
+            "language": {
+                search: '',
+                searchPlaceholder: 'Search your option',
+                zeroRecords: '<p>No option found</p>',
+                lengthMenu: '_MENU_',
+
+            },
+            "data": items,
+            "order": [[0, 'asc' ]],
+            columnDefs: [{
+                targets: 0,
+                className: 'info'
+            }],
+            columns: [{
+                data: 'item',
+                render: {
+                    "display": 'display',
+                    "filter": 'keyword'
+                }
+            }]
+        });
     });
+}
+
+$(document).ready(function () {
+
+    updateOptionTable();
 
     $("#searchTerm, #website").keyup(function () {
         var searchTerm = $(this).val();

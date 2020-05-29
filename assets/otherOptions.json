@@ -1,0 +1,172 @@
+[
+  {
+    "title": "Manage History",
+    "keyword": "Manage,History",
+    "link": "chrome://history/"
+  },
+  {
+    "title": "Clear Browsing Data",
+    "keyword": "Clear,Browsing,Data",
+    "link": "chrome://settings/clearBrowserData"
+  },
+  {
+    "title": "Manage Auto Fill Passwords",
+    "keyword": "Manage Auto Fill Passwords",
+    "link": "chrome://settings/passwords"
+  },
+  {
+    "title": "Manage Auto Fill Addresses",
+    "keyword": "Manage Auto Fill Addresses",
+    "link": "chrome://settings/addresses"
+  },
+  {
+    "title": "About Chrome",
+    "keyword": "About Chrome",
+    "link": "chrome://settings/help"
+  },
+  {
+    "title": "Manage Search Engines",
+    "keyword": "Manage Search Engines",
+    "link": "chrome://settings/searchEngines"
+  },
+  {
+    "title": "Manage Extensions",
+    "keyword": "Manage Extensions",
+    "link": "chrome://extensions/"
+  },
+  {
+    "title": "Manage Languages",
+    "keyword": "Manage Languages",
+    "link": "chrome://settings/languages"
+  },
+  {
+    "title": "Manage Downloads Directory",
+    "keyword": "Manage Downloads Directory",
+    "link": "chrome://settings/downloads"
+  },
+  {
+    "title": "Manage Printing",
+    "keyword": "Manage Printing",
+    "link": "chrome://settings/printing"
+  },
+  {
+    "title": "System Settings",
+    "keyword": "System Settings",
+    "link": "chrome://settings/system"
+  },
+  {
+    "title": "Manage Account",
+    "keyword": "Manage Account",
+    "link": "chrome://settings/people"
+  },
+  {
+    "title": "Site Settings",
+    "keyword": "Site Settings",
+    "link": "chrome://settings/content"
+  },
+  {
+    "title": "Cookies and site data",
+    "keyword": "Cookies and site data",
+    "link": "chrome://settings/content/cookies"
+  },
+  {
+    "title": "View permissions and data stored across sites",
+    "keyword": "View permissions and data stored across sites",
+    "link": "chrome://settings/content/all"
+  },
+  {
+    "title": "Location permission sites",
+    "keyword": "Location permission sites",
+    "link": "chrome://settings/content/location"
+  },
+  {
+    "title": "Camera permission sites",
+    "keyword": "Camera permission sites",
+    "link": "chrome://settings/content/camera"
+  },
+  {
+    "title": "Microphone permission sites",
+    "keyword": "Microphone permission sites",
+    "link": "chrome://settings/content/microphone"
+  },
+  {
+    "title": "Pop-ups permission sites",
+    "keyword": "Pop-ups permission sites",
+    "link": "chrome://settings/content/popups"
+  },
+  {
+    "title": "Notifications permission sites",
+    "keyword": "Notifications permission sites",
+    "link": "chrome://settings/content/notifications"
+  },
+  {
+    "title": "Allowed sites to play sound",
+    "keyword": "Allowed sites to play sound",
+    "link": "chrome://settings/content/sound"
+  },
+  {
+    "title": "PDF documents file setting",
+    "keyword": "PDF documents file setting",
+    "link": "chrome://settings/content/pdfDocuments"
+  },
+  {
+    "title": "Version Information",
+    "keyword": "Version Information",
+    "link": "chrome://version/"
+  },
+  {
+    "title": "Components",
+    "keyword": "Components",
+    "link": "chrome://components/"
+  },
+  {
+    "title": "device log",
+    "keyword": "device log",
+    "link": "chrome://device-log/"
+  },
+  {
+    "title": "discards tabs report",
+    "keyword": "discards tabs report",
+    "link": "chrome://discards/"
+  },
+  {
+    "title": "Devices",
+    "keyword": "Devices",
+    "link": "chrome://devices/"
+  },
+  {
+    "title": "inspect devices",
+    "keyword": "inspect devices",
+    "link": "chrome://inspect/#devices"
+  },
+  {
+    "title": "Autocomplete Action Predictor",
+    "keyword": "Autocomplete Action Predictor",
+    "link": "chrome://predictors/"
+  },
+  {
+    "title": "Google Chrome Terms of Service",
+    "keyword": "Google Chrome Terms of Service",
+    "link": "chrome://terms/"
+  },
+  {
+    "title": "Test Devices",
+    "keyword": "Test Devices",
+    "link": "chrome://usb-internals/"
+  },
+  {
+    "title": "restart chrome",
+    "keyword": "restart,chrome",
+    "link": "chrome://restart/"
+  },
+  {
+    "title": "quit chrome",
+    "keyword": "quit,chrome",
+    "link": "chrome://quit/"
+  },
+  {
+    "title": "",
+    "keyword": "",
+    "link": ""
+  }
+]
