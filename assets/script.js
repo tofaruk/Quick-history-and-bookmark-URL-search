@@ -3,6 +3,7 @@ const kMillisecondsPerWeek = kMillisecondsPerDay * 7;
 const kOneWeekAgo = (new Date).getTime() - kMillisecondsPerWeek;
 
 var bookmarks = [];
+var tabs = [];
 var folders = [];
 
 document.addEventListener("DOMContentLoaded", function (event) {
@@ -11,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     setTimeout(function () {
         buildNavigationOptions();
         getBookTree();
+        setTabs();
     }, 1000);
 
 });
@@ -154,7 +156,14 @@ var getBookTree = function () {
             traverse(data);
         });
     }
+}
 
+var setTabs = function () {
+    if (tabs.length == 0) {
+        chrome.tabs.query({},function (data) {
+            tabs = data;
+        });
+    }
 }
 var constructBookmarkTable = function () {
 
@@ -205,7 +214,7 @@ var constructBookmarkTable = function () {
             resetRemoveCheckBoxes('bookmark');
         });
 
-        $("div.left_tools").append($("#datatableFilters").html());
+        $("#bookmarkContainer div.left_tools").append($("#bookmarkDatatableFilters").html());
 
         var unique = hostnames.filter(onlyUnique);
         unique.forEach(function (item) {
@@ -222,6 +231,75 @@ var constructBookmarkTable = function () {
 
 }
 
+var constructTabTable = function () {
+
+    var tabTable = $("#tabContainer .item_table");
+    var trOriginal = $("#coreItemTable .core_tab_item");
+
+    if ($.fn.DataTable.isDataTable("#tabContainer .item_table")) {
+        return;
+    }
+
+    tabTable.find(".item").remove();
+    var hostnames = [];
+    tabs.forEach(function (item) {
+        hostnames.push(((new URL(item.url)).hostname));
+        var tr = trOriginal.clone();
+        tr.removeClass('core_tab_item');
+        tr.addClass('item');
+        tr.find("td.select input[name='tab[]']").val(item.id);
+        tr.find("p.info_title span.favicon").css('content', 'url("' + item.favIconUrl + '")');
+        tr.find("p.info_title a.title")
+            .text(item.title ? item.title : item.url)
+           // .attr('href', item.url)
+            .attr('title', item.url);
+        tr.find('td.info').attr('data-search', (item.title+' :'+item.url));
+        tr.find('input[name=active]').prop('checked', item.active);
+        tr.find('input[name=pinned]').prop('checked', item.pinned);
+        tr.find('input[name=muted]').prop('checked', item.mutedInfo.muted);
+        tr.find('input[name=autoDiscardable]').prop('checked', item.autoDiscardable);
+        tr.find('input[name=highlighted]').prop('checked', item.highlighted);
+        tr.attr('data-tabId', item.id).attr('data-windowId', item.windowId)
+        tabTable.append(tr);
+    });
+    if (tabs.length > 0) {
+        var tabDataTable = tabTable.dataTable({
+            "ordering": false,
+            "info": false,
+            "pageLength": 10,
+            "lengthMenu": [10, 25, 50, 100, 500, 1000],
+            "pagingType": "simple",
+            "dom": '<"tools_wrapper"<"left_tools"f><"mid_tools"p><"right_tools"l>>',
+            "language": {
+                search: '',
+                searchPlaceholder: 'Search tab',
+                zeroRecords: '<p>No tab found</p>',
+                lengthMenu: '_MENU_',
+
+            }
+        });
+
+        tabDataTable.on('search.dt', function () {
+            // after search apply on datatable
+            resetRemoveCheckBoxes('tabs');
+        });
+
+        $("#tabContainer div.left_tools").append($("#tabDatatableFilters").html());
+
+        var unique = hostnames.filter(onlyUnique);
+        unique.forEach(function (item) {
+            $("#tabWebsiteData").append('<option value="' + item + '">')
+        });
+
+        $('#tabWebsite').keyup(function () {
+            tabDataTable.api().column(1)
+                .search($(this).val())
+                .draw();
+        });
+
+    }
+
+}
 
 var resetRemoveCheckBoxes = function (recordType) {
     $("#" + recordType + "Container tr input[type='checkbox']").prop('checked', false);
@@ -253,8 +331,8 @@ var updateOptionTable = function () {
         $.each(data, function (key, val) {
             items.push({
                 item: {
-                    keyword: val.keyword + ',' + val.title,
-                    display: '<p><a class="linkTo" href="' + val.link + '">' + val.title + '</a></p>'
+                    keyword: val.title + ': ' + val.keyword,
+                    display: '<p><a class="linkTo" title="'+val.keyword+'" href="' + val.link + '">' + val.title + '</a></p>'
                 }
             });
         });
@@ -325,10 +403,11 @@ $(document).ready(function () {
         $(".tabcontent").hide();
         $("#" + $(this).attr('data-name')).show();
         constructBookmarkTable();
+        constructTabTable();
 
     });
 
-    $("#allHistories, #allBookmarks").on("change", function () {
+    $("#allHistories, #allBookmarks, #allTabs").on("change", function () {
         var recordType = getRecordType(this);
 
         var items = $("#" + recordType + "Container tr.item input[name='" + recordType + "[]']");
@@ -346,7 +425,7 @@ $(document).ready(function () {
         updateRemoveButton(getRecordType(this));
     });
 
-    $(".remove").on("click", function () {
+    $(".action").on("click", function () {
         var recordType = getRecordType(this);
         var items = $("#" + recordType + "Container tr.item input[name='" + recordType + "[]']");
 
@@ -358,12 +437,35 @@ $(document).ready(function () {
             if (recordType == "bookmark") {
                 chrome.bookmarks.remove($(this).val());
             }
+            if (recordType == "tab") {
+                chrome.tabs.remove(parseInt($(this).val()), function(){});
+            }
 
             $(this).prop('checked', false).closest('tr.item').hide();
         });
 
         updateRemoveButton(recordType);
 
+    });
+
+    $(document).on("change", ".tabActions input", function () {
+        var actionId = parseInt($(this).closest("tr").attr('data-tabId'));
+        var windowId = parseInt($(this).closest("tr").attr('data-windowId'));
+        var name = ($(this).attr('name'));
+
+        chrome.tabs.update(actionId, {[name]: $(this).is(':checked')});
+        if (name == 'active') {
+            chrome.windows.update(windowId, {focused: true});
+        }
+
+    });
+
+    $(document).on("click", "#tabContainer a.goto", function () {
+        var actionId = parseInt($(this).closest("tr").attr('data-tabId'));
+        var windowId = parseInt($(this).closest("tr").attr('data-windowId'));
+        var name = ($(this).attr('name'));
+        chrome.tabs.update(actionId, {[name]: true});
+        chrome.windows.update(windowId, {focused: true});
     });
 
     $(document).on("click", "#website, #bookmarkWebsite", function () {

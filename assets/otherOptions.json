@@ -1,12 +1,27 @@
 [
   {
-    "title": "Manage History",
-    "keyword": "all,chrome",
+    "title": "About chrome and update chrome version ",
+    "keyword": "See version number, check if google Chrome is up to date, Automatically update Chrome for all users Learn more",
+    "link": "chrome://settings/help"
+  },
+  {
+    "title": "Version Information",
+    "keyword": "Google chrome revision, User Agent, versions: Operating system , javaScript , Flash ",
+    "link": "chrome://version/"
+  },
+  {
+    "title": "Manage browsing history",
+    "keyword": "Search all from chrome, see more from same website, remove history ",
     "link": "chrome://history/"
   },
   {
-    "title": "Clear Browsing Data",
-    "keyword": "history,cookies,download,cached,autofill,password,address",
+    "title": "Cookies and site data",
+    "keyword": "See All cookies and site data, clear, block , clear on exit",
+    "link": "chrome://settings/content/cookies"
+  },
+  {
+    "title": "Manage browsing data",
+    "keyword": "Clear, history,cookies,download,cached,autofill,password,address",
     "link": "chrome://settings/clearBrowserData"
   },
   {
@@ -15,158 +30,139 @@
     "link": "chrome://settings/passwords"
   },
   {
-    "title": "Manage Auto Fill Addresses",
-    "keyword": "mobile numbers,phone numbers, email addresses and delivery addresses, shipping addresses",
+  "title": "Manage chrome extensions",
+  "keyword": "Remove/delete, enable,disable, see details, update plugin, enable developer mode ",
+  "link": "chrome://extensions/"
+},
+  {
+    "title": "Manage auto-fill addresses",
+    "keyword": "See saved mobile numbers or phone numbers, email addresses and delivery addresses, shipping addresses",
     "link": "chrome://settings/addresses"
   },
   {
-    "title": "About Chrome/ Update chrome ",
-    "keyword": "version,number, Google Chrome is up to date, Automatically update Chrome for all users Learn more",
-    "link": "chrome://settings/help"
+    "title": "View permissions and data stored across sites",
+    "keyword": "See all sites , reset permissions, clear data",
+    "link": "chrome://settings/content/all"
   },
   {
-    "title": "Manage Search Engines",
-    "keyword": "set default",
+    "title": "Manage search engines",
+    "keyword": "Set or change default search engines",
     "link": "chrome://settings/searchEngines"
   },
   {
-    "title": "Manage Extensions",
-    "keyword": "remove, delete, enable,disable, details, update, plugin, developer mode ",
-    "link": "chrome://extensions/"
-  },
-  {
     "title": "Manage Languages",
-    "keyword": "Spell check, add, remove, translate",
+    "keyword": "Change setting for spelling check, add language , remove language, set translation",
     "link": "chrome://settings/languages"
   },
   {
-    "title": "Manage Downloads",
-    "keyword": "change , directory, history, ask",
+    "title": "Manage downloads",
+    "keyword": "Change default directory for download, see download history, ask",
     "link": "chrome://settings/downloads"
   },
   {
     "title": "Manage Printing",
-    "keyword": "google cloud",
+    "keyword": "Set printer setting , google cloud setting",
     "link": "chrome://settings/printing"
   },
   {
-    "title": "System Settings",
-    "keyword": "System Settings",
+    "title": "System settings",
+    "keyword": "See system setting options , reset settings, computer proxy settings",
     "link": "chrome://settings/system"
   },
   {
-    "title": "Manage Account",
-    "keyword": "Manage Account",
+    "title": "Manage account",
+    "keyword": "Chrome Account setting , people account, sync setup and Other Google services, Auto-complete searches and URLs ",
     "link": "chrome://settings/people"
   },
   {
-    "title": "Site Settings",
-    "keyword": "Site Settings",
+    "title": "Site settings",
+    "keyword": "Site content settings and Permissions, Insecure content, paymentHandler",
     "link": "chrome://settings/content"
   },
   {
-    "title": "Cookies and site data",
-    "keyword": "Cookies and site data",
-    "link": "chrome://settings/content/cookies"
-  },
-  {
-    "title": "View permissions and data stored across sites",
-    "keyword": "View permissions and data stored across sites",
-    "link": "chrome://settings/content/all"
-  },
-  {
     "title": "Location permission sites",
-    "keyword": "Location permission sites",
+    "keyword": "Allow or block website for location , enable or disable: Ask before accessing location ",
     "link": "chrome://settings/content/location"
   },
   {
     "title": "Camera permission sites",
-    "keyword": "Camera permission sites",
+    "keyword": "Allow or block website for accessing camera, enable or disable: Ask before accessing camera",
     "link": "chrome://settings/content/camera"
   },
   {
     "title": "Microphone permission sites",
-    "keyword": "Microphone permission sites",
+    "keyword": "Allow or block website for accessing microphone, enable or disable: Ask before accessing microphone",
     "link": "chrome://settings/content/microphone"
   },
   {
     "title": "Pop-ups permission sites",
-    "keyword": "Pop-ups permission sites",
+    "keyword": "Allow or block website for showing Pop-up",
     "link": "chrome://settings/content/popups"
   },
   {
-    "title": "Notifications permission sites",
-    "keyword": "Notifications permission sites",
+    "title": "Notifications permission settings",
+    "keyword": "Allow or block website for showing notifications",
     "link": "chrome://settings/content/notifications"
   },
   {
     "title": "Allowed sites to play sound",
-    "keyword": "Allowed sites to play sound",
+    "keyword": "Allow or mute website for playing sound",
     "link": "chrome://settings/content/sound"
   },
   {
     "title": "PDF documents file setting",
-    "keyword": "PDF documents file setting",
+    "keyword": "Download PDF files instead of automatically opening them in Chrome",
     "link": "chrome://settings/content/pdfDocuments"
   },
   {
-    "title": "Version Information",
-    "keyword": "Version Information",
-    "link": "chrome://version/"
-  },
-  {
     "title": "Components",
-    "keyword": "Components",
+    "keyword": "MEI Preload, Legacy TLS Deprecation Configuration, Intervention Policy Database, Subresource Filter Rules, Adobe Flash Player",
     "link": "chrome://components/"
   },
   {
-    "title": "device log",
-    "keyword": "device log",
-    "link": "chrome://device-log/"
-  },
-  {
-    "title": "discards tabs report",
-    "keyword": "discards tabs report",
-    "link": "chrome://discards/"
-  },
-  {
     "title": "Devices",
-    "keyword": "Devices",
+    "keyword": "See my Devices, add google cloud printer ",
     "link": "chrome://devices/"
   },
   {
-    "title": "inspect devices",
-    "keyword": "inspect devices",
-    "link": "chrome://inspect/#devices"
+    "title": "Test Devices",
+    "keyword": "Bus Number, Port Number, Vendor Id, Product Id, Manufacturer Name,Product Name,Serial Number, usb-internals",
+    "link": "chrome://usb-internals/"
   },
   {
-    "title": "Autocomplete Action Predictor",
-    "keyword": "Autocomplete Action Predictor",
+    "title": "Device log",
+    "keyword": "Login  Network  Power  Bluetooth  USB  HID  Printer  FIDO",
+    "link": "chrome://device-log/"
+  },
+  {
+    "title": "Discards tabs report",
+    "keyword": "database and graph, Utility Rank, Reactivation, Score, Site Engagement Score, Tab Title , Tab URL, Visibility, Loading State, Lifecycle State, Can freeze?, Discard Count, Auto Discardable, Last Active, Actions",
+    "link": "chrome://discards/"
+  },
+
+  {
+    "title": "Inspect devices, DevTools",
+    "keyword": "Remote Target, Discover USB devices, Discover network targets, Open dedicated DevTools for Node, Pages, Service workers",
+    "link": "chrome://inspect/"
+  },
+  {
+    "title": "Autocomplete Action Predictor, Resource Prefetch Predictor",
+    "keyword": "Host Origin Num Hits Num Misses Consec Misses Average Position Always Access Net Accessed Net Score",
     "link": "chrome://predictors/"
   },
   {
     "title": "Google Chrome Terms of Service",
-    "keyword": "Google Chrome Terms of Service",
+    "keyword": "Google Chrome and Chrome OS additional Terms of Service, Adobe, AVC, MPEG-4, Content Protection Terms",
     "link": "chrome://terms/"
   },
   {
-    "title": "Test Devices",
-    "keyword": "Test Devices",
-    "link": "chrome://usb-internals/"
-  },
-  {
-    "title": "restart chrome",
-    "keyword": "restart,chrome",
+    "title": "Restart chrome",
+    "keyword": "Restart,chrome,browser",
     "link": "chrome://restart/"
   },
   {
-    "title": "quit chrome",
-    "keyword": "quit,chrome",
+    "title": "Quit chrome",
+    "keyword": "quit,chrome, browser",
     "link": "chrome://quit/"
-  },
-  {
-    "title": "",
-    "keyword": "",
-    "link": ""
   }
 ]

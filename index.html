@@ -11,6 +11,7 @@
     <div class="tab">
         <button class="tablinks active" data-name="historyContainer">History</button>
         <button class="tablinks" data-name="bookmarkContainer">Bookmark</button>
+        <button class="tablinks" data-name="tabContainer">Tabs</button>
         <button class="tablinks" data-name="othersContainer">Browser Options</button>
     </div>
 
@@ -59,7 +60,7 @@
                     <input type="checkbox" id="allHistories" name="all_histories">
                 </th>
                 <th>
-                    <span class="th-nav"><button id="removeHistory" class="remove">Remove history record</button></span>
+                    <span class="th-nav"><button id="removeHistory" class="action">Remove history record</button></span>
                     <span class="th-nav th-manage"> <a class="linkTo" href="chrome://history/">Manage History</a></span>
                 </th>
             </tr>
@@ -80,9 +81,26 @@
                     <input type="checkbox" id="allBookmarks" name="all_bookmarks">
                 </th>
                 <th>
-                    <span class="th-nav"><button id="removeBookmark" class="remove">Remove bookmark record</button></span>
+                    <span class="th-nav"><button id="removeBookmark" class="action">Remove bookmark record</button></span>
                     <span class="th-nav th-manage"> <a class="linkTo" href="chrome://bookmarks/">Manage Bookmark</a>
                     </span>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+    <div id="tabContainer" class="tabcontent" style="display: none;">
+        <table class="item_table">
+            <thead>
+            <tr>
+                <th class="select">
+                    <input type="checkbox" id="allTabs" name="all_tabs">
+                </th>
+                <th>
+                    <span class="th-nav"><button id="removeTab" class="action">Remove tab</button></span>
                 </th>
             </tr>
             </thead>
@@ -151,12 +169,40 @@
             </p>
         </td>
     </tr>
+    <tr class="item core_tab_item">
+        <td class="select"><input type="checkbox" name="tab[]" value=""></td>
+        <td class="info">
+            <p class="info_title">
+                <span class="icon favicon"></span>
+                <a class="title goto" name="selected" href="javascript:void(0);">
+                </a>
+            </p>
+            <p class="tabActions">
+                <input type="checkbox" name="active">
+                <span class="folder_container">Active</span>
+                <input type="checkbox" name="muted">
+                <span class="folder_container">Muted</span>
+                <input type="checkbox" name="autoDiscardable">
+                <span class="folder_container">Auto Discardable</span>
+                <input type="checkbox" name="pinned">
+                <span class="folder_container">Pinned</span>
+            </p>
+
+        </td>
+    </tr>
     </tbody>
 </table>
-<div id="datatableFilters" style="display: none;">
+<div id="bookmarkDatatableFilters" style="display: none;">
     <div class="filterByWebsite">
         <input id="bookmarkWebsite" old-value="" list="bookmarkWebsiteData" placeholder="Website">
         <datalist id="bookmarkWebsiteData">
+    </div>
+</div>
+
+<div id="tabDatatableFilters" style="display: none;">
+    <div class="filterByWebsite">
+        <input id="tabWebsite" old-value="" list="tabWebsiteData" placeholder="Website">
+        <datalist id="tabWebsiteData">
     </div>
 </div>
 

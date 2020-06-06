@@ -18,7 +18,8 @@
   "permissions": [
     "history",
     "bookmarks",
-    "chrome://favicon/"
+    "chrome://favicon/",
+    "tabs"
   ],
   "icons": {
     "16": "assets/icons/searchHistory16.png",
