@@ -313,9 +313,13 @@ var updateRemoveButton = function (recordType) {
         if (items.filter(':checked').length > 1) {
             record = ' records';
         }
-        removeButtonObj.show().text("Remove (" + items.filter(':checked').length + ") " + recordType + record);
+        if (recordType != 'tab') {
+            removeButtonObj.show().text("Remove (" + items.filter(':checked').length + ") " + recordType + record);
+        }
     } else {
-        removeButtonObj.text("Remove " + recordType + " record");
+        if (recordType != 'tab') {
+            removeButtonObj.text("Remove " + recordType + " record");
+        }
     }
 }
 var getRecordType = function (obj) {
@@ -325,7 +329,7 @@ var getRecordType = function (obj) {
 }
 
 var updateOptionTable = function () {
-    $.getJSON("assets/otherOptions.json", function (data) {
+    $.getJSON("assets/optionsData.json", function (data) {
         var otherOptionsTable = $("#otherOptionsTable");
         var items = [];
         $.each(data, function (key, val) {

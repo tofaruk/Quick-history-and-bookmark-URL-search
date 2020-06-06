@@ -1,7 +1,7 @@
 {
-  "name": "Quick history and bookmark URL search",
-  "short_name": "Quick URL search",
-  "description": "Easily search your browser history and bookmark URLs. Remove unnecessary URLs.",
+  "name": "Chrome link search",
+  "short_name": "Link search",
+  "description": "Easily search your browser history, bookmark, tab in all windows and useful chrome options links",
   "manifest_version": 2,
   "version": "1.1",
   "offline_enabled": true,
@@ -12,7 +12,7 @@
   "browser_action": {
     "default_icon": "assets/icons/searchHistory128.png",
     "default_popup": "index.html",
-    "default_title": "Quick search history and bookmark URL!!"
+    "default_title": "Chrome link search"
   },
 
   "permissions": [
