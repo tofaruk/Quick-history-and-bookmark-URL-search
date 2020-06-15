@@ -7,7 +7,7 @@ var tabs = [];
 var folders = [];
 
 document.addEventListener("DOMContentLoaded", function (event) {
-    searchHistory('', ((new Date).getTime() - kMillisecondsPerDay), (new Date).getTime(), 50);
+    searchHistory('', kOneWeekAgo, (new Date).getTime(), 50);
 
     setTimeout(function () {
         buildNavigationOptions();
