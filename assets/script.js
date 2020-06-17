@@ -251,12 +251,11 @@ var constructTabTable = function () {
         tr.find("p.info_title span.favicon").css('content', 'url("' + item.favIconUrl + '")');
         tr.find("p.info_title a.title")
             .text(item.title ? item.title : item.url)
-           // .attr('href', item.url)
             .attr('title', item.url);
         tr.find('td.info').attr('data-search', (item.title+' :'+item.url));
         tr.find('input[name=active]').prop('checked', item.active);
         tr.find('input[name=pinned]').prop('checked', item.pinned);
-        tr.find('input[name=muted]').prop('checked', item.mutedInfo.muted);
+       // tr.find('input[name=muted]').prop('checked', item.mutedInfo.muted);
         tr.find('input[name=autoDiscardable]').prop('checked', item.autoDiscardable);
         tr.find('input[name=highlighted]').prop('checked', item.highlighted);
         tr.attr('data-tabId', item.id).attr('data-windowId', item.windowId)
