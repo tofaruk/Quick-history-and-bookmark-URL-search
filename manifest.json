@@ -2,14 +2,13 @@
   "name": "Chrome link search",
   "short_name": "Link search",
   "description": "Easily search your browser history, bookmark, tab in all windows and useful chrome options links",
-  "manifest_version": 2,
-  "version": "1.3",
+  "manifest_version": 3,
+  "version": "2.1",
   "offline_enabled": true,
   "background": {
-    "scripts": ["assets/background.js"],
-    "persistent": false
+    "service_worker": "assets/background.js"
   },
-  "browser_action": {
+  "action": {
     "default_icon": "assets/icons/searchHistory128.png",
     "default_popup": "index.html",
     "default_title": "Chrome link search"
@@ -18,8 +17,15 @@
   "permissions": [
     "history",
     "bookmarks",
-    "chrome://favicon/",
-    "tabs"
+    "tabs",
+    "favicon"
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["_favicon/*"],
+      "matches": ["<all_urls>"],
+      "extension_ids": ["*"]
+    }
   ],
   "icons": {
     "16": "assets/icons/searchHistory16.png",

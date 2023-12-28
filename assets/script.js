@@ -44,7 +44,7 @@ var constructHistory = function (historyItems) {
             .text(item.title ? item.title : item.url)
             .attr('href', item.url)
             .attr('title', item.url);
-        tr.find("p.info_title span.favicon").css('content', 'url("chrome://favicon/' + item.url + '")');
+        tr.find("p.info_title span.favicon").css('content', 'url(' + faviconURL(item.url) + ')');
         tr.find("p.info_time span.time_info").text(getVisitTime(item));
         tr.find("p.info_url a.full_url").text(item.url).attr('href', item.url);
 
@@ -87,6 +87,12 @@ var constructNavigationOptions = function (historyItems) {
 
 }
 
+function faviconURL(u) {
+    const url = new URL(chrome.runtime.getURL("/_favicon/"));
+    url.searchParams.set("pageUrl", u);
+    url.searchParams.set("size", "32");
+    return url.toString();
+}
 function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
 }
@@ -186,7 +192,7 @@ var constructBookmarkTable = function () {
             .text(item.title ? item.title : item.url)
             .attr('href', item.url)
             .attr('title', item.url);
-        tr.find("p.info_title span.favicon").css('content', 'url("chrome://favicon/' + item.url + '")');
+        tr.find("p.info_title span.favicon").css('content', 'url(' + faviconURL(item.url) + ')');
         var folderArr = getFolders(folders[item.parentId], []);
         tr.find("p.info_folder span.folder_container").html(folderArr.join('<span class="icon arrow"></span> '));
         tr.find("p.info_url a.full_url").text(item.url).attr('href', item.url);
